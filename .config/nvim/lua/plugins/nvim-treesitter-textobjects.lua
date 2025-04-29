@@ -3,8 +3,8 @@ return {
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 	},
-	init=function()
-		local config = require 'nvim-treesitter.configs';
+	init = function()
+		local config = require("nvim-treesitter.configs")
 		config.setup({
 			textobjects = {
 				select = {
@@ -32,9 +32,9 @@ return {
 					-- and should return the mode ('v', 'V', or '<c-v>') or a table
 					-- mapping query_strings to modes.
 					selection_modes = {
-						['@parameter.outer'] = 'v', -- charwise
-						['@function.outer'] = 'V', -- linewise
-						['@class.outer'] = '<c-v>', -- blockwise
+						["@parameter.outer"] = "v", -- charwise
+						["@function.outer"] = "V", -- linewise
+						["@class.outer"] = "<c-v>", -- blockwise
 					},
 					-- If you set this to `true` (default is `false`) then any textobject is
 					-- extended to include preceding or succeeding whitespace. Succeeding
@@ -51,12 +51,12 @@ return {
 			swap = {
 				enable = true,
 				swap_next = {
-					["<leader>a"] = {query="@parameter.inner", desc="Swap with next parameter."},
+					["<leader>a"] = { query = "@parameter.inner", desc = "Swap with next parameter." },
 				},
 				swap_previous = {
-					["<leader>A"] = {query="@parameter.inner", desc="Swap with previous parameter."},
+					["<leader>A"] = { query = "@parameter.inner", desc = "Swap with previous parameter." },
 				},
 			},
 		})
-	end
+	end,
 }
