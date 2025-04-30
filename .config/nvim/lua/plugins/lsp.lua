@@ -189,8 +189,8 @@ return {
 		--  By default, Neovim doesn't support everything that is in the LSP specification.
 		--  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
 		--  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		-- local capabilities = require('blink.cmp').get_lsp_capabilities()
+		local capabilities_default = vim.lsp.protocol.make_client_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities(capabilities_default)
 
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -203,6 +203,7 @@ return {
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
 			bashls = {},
+			sqlls = {},
 			-- clangd = {},
 			-- gopls = {},
 			-- pyright = {},
@@ -250,6 +251,9 @@ return {
 			"stylua", -- Used to format Lua code
 			"prettierd",
 			"prettier",
+			"isort",
+			"black",
+			"sqlfmt",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
