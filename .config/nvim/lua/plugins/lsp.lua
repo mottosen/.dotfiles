@@ -8,9 +8,23 @@ return {
 		{ "williamboman/mason.nvim", opts = {} },
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		{
+			"folke/lazydev.nvim",
+			ft = "lua",
+			opts = {
+				library = {
+					-- Load luvit types when the vim.uv word is found
+					{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				},
+			},
+		},
+		{ "Bilal2453/luvit-meta", lazy = true },
 
 		-- Useful status updates for LSP.
 		{ "j-hui/fidget.nvim", opts = {} },
+
+		-- Allows extra capabilities provided by blink.cmp
+		"saghen/blink.cmp",
 	},
 	config = function()
 		-- Brief aside: **What is LSP?**
@@ -204,32 +218,53 @@ return {
 		local servers = {
 			bashls = {},
 			sqlls = {},
-			-- clangd = {},
-			-- gopls = {},
-			-- pyright = {},
-			-- rust_analyzer = {},
-			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-			--
-			-- Some languages (like typescript) have entire language plugins that can be useful:
-			--    https://github.com/pmizio/typescript-tools.nvim
-			--
-			-- But for many setups, the LSP (`ts_ls`) will work just fine
-			-- ts_ls = {},
-			--
+			neocmake = {},
+
+			clangd = {
+				-- keys = {
+				-- 	{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+				-- },
+				root_dir = function(fname)
+					return require("lspconfig.util").root_pattern(
+						"Makefile",
+						"configure.ac",
+						"configure.in",
+						"config.h.in",
+						"meson.build",
+						"meson_options.txt",
+						"build.ninja"
+					)(fname) or require("lspconfig.util").root_pattern(
+						"compile_commands.json",
+						"compile_flags.txt"
+					)(fname) or vim.fs.dirname(vim.fs.find(".git", { path = startpath, upward = true })[1])
+				end,
+				capabilities = {
+					offsetEncoding = { "utf-16" },
+				},
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=detailed",
+					"--function-arg-placeholders",
+					"--fallback-style=llvm",
+				},
+				init_options = {
+					usePlaceholders = true,
+					completeUnimported = true,
+					clangdFileStatus = true,
+				},
+			},
 
 			lua_ls = {
-				-- -- cmd = { ... },
-				-- -- filetypes = { ... },
-				-- -- capabilities = {},
-				-- settings = {
-				-- 	Lua = {
-				-- 		completion = {
-				-- 			callSnippet = 'Replace',
-				-- 		},
-				-- 		-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-				-- 		-- diagnostics = { disable = { 'missing-fields' } },
-				-- 	},
-				-- },
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim", "startpath" },
+						},
+					},
+				},
 			},
 		}
 
@@ -248,12 +283,18 @@ return {
 		-- for you, so that they are available from within Neovim.
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			"stylua", -- Used to format Lua code
+			"stylua",
 			"prettierd",
 			"prettier",
 			"isort",
 			"black",
 			"sqlfmt",
+			"cpplint",
+			"clang-format",
+			"cmakelint",
+			"cmakelang",
+			"codelldb",
+			"cpptools",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

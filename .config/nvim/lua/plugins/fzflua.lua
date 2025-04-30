@@ -1,7 +1,25 @@
 return {
 	"ibhagwan/fzf-lua",
 	dependencies = { "echasnovski/mini.icons" },
-	opts = {},
+	opts = function()
+		local fzf = require("fzf-lua")
+		local actions = fzf.actions
+
+		return {
+			files = {
+				actions = {
+					["alt-i"] = { actions.toggle_ignore },
+					["alt-h"] = { actions.toggle_hidden },
+				},
+			},
+			grep = {
+				actions = {
+					["alt-i"] = { actions.toggle_ignore },
+					["alt-h"] = { actions.toggle_hidden },
+				},
+			},
+		}
+	end,
 	keys = {
 		{
 			"<leader>ff",
@@ -69,7 +87,7 @@ return {
 		{
 			"<leader>fs",
 			function()
-				require("fzf-lua").live_grep()
+				require("fzf-lua").live_grep_glob()
 			end,
 			desc = "[F]uzzy [S]earch in CWD.",
 		},
