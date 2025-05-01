@@ -8,10 +8,17 @@ M.cpp = {
 		program = function()
 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 		end,
-		cwd = vim.fn.getcwd(),
+		cwd = "${workspaceFolder}",
 		stopOnEntry = false,
 		args = {},
 		runInTerminal = true,
+		setupCommands = {
+			{
+				text = "-enable-pretty-printing",
+				description = "enable pretty printing",
+				ignoreFailures = false,
+			},
+		},
 	},
 }
 

@@ -26,8 +26,6 @@ require("config.options")
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		-- add LazyVim and import its plugins
-		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		-- import your plugins
 		{ import = "plugins" },
 	},
