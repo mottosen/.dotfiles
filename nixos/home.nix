@@ -1,11 +1,10 @@
 { config, pkgs, ... }:
 
-let
-    myAliases = {
-      la = "ls -all";
-    };
-in
 {
+  imports = [
+    ./sh-module.nix
+  ];
+
   home.username = "test";
   home.homeDirectory = "/home/test";
 
@@ -20,15 +19,5 @@ in
 
   home.sessionVariables = {
     EDITOR = "vim";
-  };
-
-  programs.bash = {
-    enable = true;
-    shellAliases = myAliases;
-  };
-
-  programs.zsh = {
-    enable = true;
-    shellAliases = myAliases;
   };
 }
