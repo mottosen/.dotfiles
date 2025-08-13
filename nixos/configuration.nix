@@ -39,4 +39,10 @@
 
   virtualisation.virtualbox.guest.enable = true;
 
+  environment.shells = with pkgs; [ bash zsh ];
+  environment.sessionVariables = {
+    EDITOR = "vim";
+  };
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
 }
