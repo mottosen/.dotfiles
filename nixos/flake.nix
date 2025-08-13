@@ -11,24 +11,26 @@
 
   outputs = { self, nixpkgs, home-manager, ... }: 
     let
-      lib = nixpkgs.lib;
+      profile = "vm";
       system = "x86_64-linux";
+
+      lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
     nixosConfigurations = {
-      vm = lib.nixosSystem {
+      system = lib.nixosSystem {
         inherit system;
         modules = [
-          ./configuration.nix
+          (./profiles + ("/" + profile) + "/system.nix")
         ];
       };
     };
     homeConfigurations = {
-      test = home-manager.lib.homeManagerConfiguration {
+      user = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home.nix
+          (./profiles + ("/" + profile) + "/user.nix")
         ];
       };
     };
