@@ -218,6 +218,8 @@ return {
 		local servers = {
 			bashls = {},
 			sqlls = {},
+			pylsp = {},
+			omnisharp = {},
 
 			clangd = {
 				-- keys = {
@@ -294,6 +296,7 @@ return {
 			--"cmakelang",
 			--"codelldb",
 			--"cpptools",
+			"csharpier",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
