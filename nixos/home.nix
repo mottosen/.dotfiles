@@ -5,19 +5,23 @@
     ./sh-module.nix
   ];
 
-  home.username = "test";
-  home.homeDirectory = "/home/test";
+  options = {};
 
-  programs.home-manager.enable = true;
-  home.stateVersion = "25.05"; # Do not change
+  config = {
+    home.username = "test";
+    home.homeDirectory = "/home/test";
 
-  home.packages = [
-  ];
+    programs.home-manager.enable = true;
+    home.stateVersion = "25.05"; # Do not change
 
-  home.file = {
-  };
+    home.packages = with pkgs; [
+    ];
 
-  home.sessionVariables = {
-    EDITOR = "vim";
+    home.file = {
+    };
+
+    home.sessionVariables = {
+      EDITOR = "vim";
+    };
   };
 }
