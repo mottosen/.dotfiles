@@ -24,6 +24,10 @@
         modules = [
           (./profiles + ("/" + profile) + "/system.nix")
         ];
+        specialArgs = {
+          inherit profile;
+          inherit system;
+        };
       };
     };
     homeConfigurations = {
@@ -32,6 +36,10 @@
         modules = [
           (./profiles + ("/" + profile) + "/user.nix")
         ];
+        extraSpecialArgs = {
+          inherit profile;
+          inherit system;
+        };
       };
     };
   };

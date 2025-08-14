@@ -1,12 +1,30 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  imports = [];
+  imports = [
+    ./virtualization
+    ./kernel
+  ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    kernelModules = [ ];
+    extraModulePackages = [ ];
+
+    loader = {
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = config.systemSettings.bootMountPath;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+    };
+
+    initrd = {
+      availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
+      kernelModules = [ ];
+    };
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
@@ -19,29 +37,11 @@
     options = [ "fmask=0022" "dmask=0022" ];
   };
 
-  systemd.tmpfiles.rules = [
-    "d /home/test/dotfiles 0755 test users -"
+  swapDevices = [
+    { device = "/swapfile"; size = 2048; }
   ];
-
-  fileSystems."/home/test/dotfiles" = {
-    device = "dotfiles";
-    fsType = "vboxsf";
-    options = [
-      "rw"
-      "uid=1000"
-      "gid=100"
-      "dmode=0755"
-      "fmode=0644"
-      "noauto"
-      "x-systemd.automount"
-      "nofail"
-    ];
-  };
-
-  swapDevices = [ ];
 
   networking.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  virtualisation.virtualbox.guest.enable = true;
+  nixpkgs.hostPlatform = config.systemSettings.architecture;
 }

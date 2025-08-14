@@ -9,7 +9,7 @@
   userSettings = {
     defaultShell = "zsh";
     shellAliases = {
-      foobar = "echo 'hi there'";
+      la = "ls -al --color";
     };
   };
 }

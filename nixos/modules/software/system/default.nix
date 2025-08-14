@@ -3,47 +3,54 @@
 {
   imports = [];
 
-  options = {};
+  # General
+  system.stateVersion = "25.05"; # Do not change
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  config = {
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+  # Garbage Collection
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 7d";
+  };
 
-    networking.hostName = "nixos-host";
-    networking.networkmanager.enable = true;
+  # Location and Network
+  time.timeZone = config.systemSettings.timezone;
+  i18n.defaultLocale = config.systemSettings.locale;
+  networking = {
+    hostName = config.systemSettings.hostname;
+    networkmanager.enable = true;
+  };
 
-    time.timeZone = "Europe/Copenhagen";
+  # System wide packages
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    git
+  ];
 
-    services.xserver = {
-      enable = true;
-      windowManager.qtile.enable = true;
-    };
-
-    users.users.test = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
-      packages = with pkgs; [
-        tree
-      ];
-    };
-
-    environment.systemPackages = with pkgs; [
-      vim
-      wget
-      git
-    ];
-
-    system.stateVersion = "25.05"; # Do not change
-
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-    virtualisation.virtualbox.guest.enable = true;
-
-    environment.shells = with pkgs; [ bash zsh ];
-    environment.sessionVariables = {
+  # Baseline terminal
+  users.defaultUserShell = pkgs.bash;
+  environment = {
+    shells = with pkgs; [ bash ];
+    sessionVariables = {
       EDITOR = "vim";
+      VISUAL = "vim";
     };
-    users.defaultUserShell = pkgs.zsh;
-    programs.zsh.enable = true;
+  };
+
+  # TODOTODO: consider
+  services.xserver = {
+    enable = true;
+    windowManager.qtile.enable = true;
+  };
+
+  # TODOTODO: variable
+  users.users.test = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
+    packages = with pkgs; [
+      tree
+    ];
   };
 }
