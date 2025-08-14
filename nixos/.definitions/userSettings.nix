@@ -4,61 +4,72 @@
   options = {
     userSettings = {
       username = lib.mkOption {
-        description = "Default Shell to use.";
+        description = "Name of system user.";
         type = lib.types.nonEmptyStr;
-        default = "bash";
+        default = "no-set";
       };
 
       name = lib.mkOption {
-        description = "Default Shell to use.";
+        description = "Real name.";
         type = lib.types.nonEmptyStr;
-        default = "bash";
+        default = "no-set";
       };
 
       email = lib.mkOption {
-        description = "Default Shell to use.";
+        description = "Email for eg. git.";
         type = lib.types.nonEmptyStr;
-        default = "bash";
+        default = "no-set";
       };
 
       dotfilesDir = lib.mkOption {
-        description = "Default Shell to use.";
-        type = lib.types.nonEmptyStr;
-        default = "bash";
+        description = "Path of .dotfiles directory.";
+        type = lib.types.path;
+        default = "../../../.dotfiles";
       };
 
       windowManager = lib.mkOption {
-        description = "Default Shell to use.";
-        type = lib.types.nonEmptyStr;
-        default = "bash";
+        description = "Windor Manager to use.";
+        type = lib.types.str;
+        default = "";
       };
 
       browser = lib.mkOption {
-        description = "Default Shell to use.";
-        type = lib.types.nonEmptyStr;
-        default = "bash";
+        description = "Browser to use.";
+        type = lib.types.str;
+        default = "";
       };
 
       terminal = lib.mkOption {
-        description = "Default Shell to use.";
-        type = lib.types.nonEmptyStr;
-        default = "bash";
+        description = "Terminal to use.";
+        type = lib.types.str;
+        default = "";
       };
 
       font = lib.mkOption {
-        description = "Default Shell to use.";
-        type = lib.types.nonEmptyStr;
-        default = "bash";
+        description = "Font to use.";
+        type = lib.types.str;
+        default = "";
       };
 
       editor = lib.mkOption {
-        description = "Default Shell to use.";
+        description = "Editor to use.";
         type = lib.types.nonEmptyStr;
-        default = "bash";
+        default = "vim";
       };
 
       spawnEditor = lib.mkOption {
-        description = "Default Shell to use.";
+        description = "Command to spawn the right editor.";
+        type = lib.types.nonEmptyStr;
+        default =
+          if ((config.systemSettings.editor == "vim") ||
+              (config.systemSettings.editor == "nvim")) then
+                "exec " + config.systemSettings.term + " -e " + config.systemSettings.editor
+          else
+            config.systemSettings.editor;
+      };
+
+      shell = lib.mkOption {
+        description = "Shell to use.";
         type = lib.types.nonEmptyStr;
         default = "bash";
       };
