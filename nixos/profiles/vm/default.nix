@@ -12,13 +12,13 @@
     };
 
     userSettings = {
-      username = "test";
+      username = "test"; # host mounted dir depends on this
       name = "test user";
       email = "test@vm.com";
       windowManager = "";
       browser = "";
-      terminal = "";
-      font = "";
+      terminal = "wezterm";
+      font = "fira-code";
       shell = "zsh";
       shellAliases = {
         la = "ls -al --color";

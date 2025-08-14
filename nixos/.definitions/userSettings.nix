@@ -21,12 +21,6 @@
         default = "no-set";
       };
 
-      dotfilesDir = lib.mkOption {
-        description = "Path of .dotfiles directory.";
-        type = lib.types.path;
-        default = "../../../.dotfiles";
-      };
-
       windowManager = lib.mkOption {
         description = "Windor Manager to use.";
         type = lib.types.str;

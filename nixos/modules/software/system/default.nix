@@ -40,8 +40,9 @@ in
   environment = {
     shells = with pkgs; [ bash zsh ];
     sessionVariables = {
-      EDITOR = config.userSettings.editor;
-      VISUAL = config.userSettings.editor;
+      EDITOR   = config.userSettings.editor;
+      VISUAL   = config.userSettings.editor;
+      TERMINAL = config.userSettings.terminal;
     };
   };
 

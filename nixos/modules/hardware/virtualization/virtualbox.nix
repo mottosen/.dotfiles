@@ -3,10 +3,10 @@
 {
   config = lib.mkIf (config.systemSettings.profile == "vm") {
     systemd.tmpfiles.rules = [
-      "d /dotfiles 0755 $USER users -"
+      "d /home/test/.dotfiles 0755 $USER users -"
     ];
 
-    fileSystems."/dotfiles" = {
+    fileSystems."/home/test/.dotfiles" = {
       device = "dotfiles";
       fsType = "vboxsf";
       options = [
