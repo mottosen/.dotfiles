@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../../profiles
     ./shell
   ];
 
@@ -9,8 +10,8 @@
   programs.home-manager.enable = true;
   home = {
     stateVersion = "25.05"; # Do not change
-    username = "test"; # TODOTODO: variable
-    homeDirectory = "/home/test"; # TODOTODO: variable
+    username = config.userSettings.username;
+    homeDirectory = "/home/" + config.userSettings.username;
     packages = with pkgs; [];
     file = {};
   };

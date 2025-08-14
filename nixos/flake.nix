@@ -18,25 +18,26 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-    nixosConfigurations = {
-      system = lib.nixosSystem {
-        inherit system;
+    homeConfigurations = {
+      user = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
         modules = [
-          (./profiles + ("/" + profile) + "/system.nix")
+          ./modules/software/user
         ];
-        specialArgs = {
+        extraSpecialArgs = {
           inherit profile;
           inherit system;
         };
       };
     };
-    homeConfigurations = {
-      user = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+    nixosConfigurations = {
+      system = lib.nixosSystem {
+        inherit system;
         modules = [
-          (./profiles + ("/" + profile) + "/user.nix")
+          ./modules/hardware
+          ./modules/software/system
         ];
-        extraSpecialArgs = {
+        specialArgs = {
           inherit profile;
           inherit system;
         };

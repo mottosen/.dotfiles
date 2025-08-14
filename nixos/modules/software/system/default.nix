@@ -1,7 +1,13 @@
 { config, lib, pkgs, ... }:
 
+let
+  user = config.userSettings.username;
+in
 {
-  imports = [];
+  imports = [
+    ../../../profiles
+    ./shell
+  ];
 
   # General
   system.stateVersion = "25.05"; # Do not change
@@ -32,10 +38,10 @@
   # Baseline terminal
   users.defaultUserShell = pkgs.bash;
   environment = {
-    shells = with pkgs; [ bash ];
+    shells = with pkgs; [ bash zsh ];
     sessionVariables = {
-      EDITOR = "vim";
-      VISUAL = "vim";
+      EDITOR = config.userSettings.editor;
+      VISUAL = config.userSettings.editor;
     };
   };
 
@@ -45,12 +51,8 @@
     windowManager.qtile.enable = true;
   };
 
-  # TODOTODO: variable
-  users.users.test = {
+  users.users."${user}" = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
-    packages = with pkgs; [
-      tree
-    ];
   };
 }

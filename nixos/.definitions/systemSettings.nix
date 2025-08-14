@@ -5,12 +5,12 @@
     systemSettings = {
       profile = lib.mkOption {
         type = lib.types.nonEmptyStr;
-        default = profile;
+        default = "not-set";
       };
 
       architecture = lib.mkOption {
         type = lib.types.nonEmptyStr;
-        default = system;
+        default = "not-set";
       };
 
       kernel = lib.mkOption {

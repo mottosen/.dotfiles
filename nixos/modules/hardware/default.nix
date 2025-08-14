@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../profiles
     ./virtualization
     ./kernel
   ];
