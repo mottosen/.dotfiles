@@ -16,7 +16,7 @@
 
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${system};
-      config-files = ./.config;
+      config-files = ../.config;
     in
     {
     nixosConfigurations = {

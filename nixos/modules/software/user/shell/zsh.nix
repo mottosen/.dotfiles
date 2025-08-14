@@ -16,12 +16,13 @@
         save = 5000;
       };
       shellAliases = config.userSettings.shellAliases;
+
+      initExtra = ''
+        eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh \
+          --config ${config.xdg.configHome}/oh-my-posh/config.yaml)"
+      '';
     };
 
-    programs.oh-my-posh = {
-      enable = true;
-      enableZshIntegration = true;
-      settings = builtins.fromTOML (builtins.unsafeDiscardStringContext (builtins.readFile "${config-files}/oh-my-posh/config.toml"));
-    };
+    xdg.configFile."oh-my-posh/config.yaml".source = config-files + /oh-my-posh/config.yaml;
   };
 }
