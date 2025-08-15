@@ -11,6 +11,7 @@
       source = config.userSettings.configFiles +
         "/wezterm/";
       recursive = true;
+      force = true;
     };
   };
 }

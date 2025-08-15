@@ -8,6 +8,8 @@ in
     ../../../profiles
     ./shell
     ./terminal
+    ./multiplexor
+    ./fastfetch
   ];
 
   # Home-manager general

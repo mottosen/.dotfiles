@@ -45,6 +45,12 @@
         default = "";
       };
 
+      multiplexor = lib.mkOption {
+        description = "Multiplexor to use.";
+        type = lib.types.str;
+        default = "";
+      };
+
       font = lib.mkOption {
         description = "Font to use.";
         type = lib.types.str;

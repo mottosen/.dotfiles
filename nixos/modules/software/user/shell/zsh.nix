@@ -33,6 +33,24 @@
       ];
 
       initContent = ''
+        # zellij
+        if [[ -z "$ZELLIJ" && -t 1 && -n "$PS1" && -z "$SSH_CONNECTION" && -z "$NO_ZELLIJ" ]]; then
+          if command -v zellij >/dev/null 2>&1; then
+            exec zellij attach -c
+          fi
+        fi
+
+        # fastfetch
+        if [[ $- == *i* && -z ''${FASTFETCH_SHOWN-} ]]; then
+          if command -v fastfetch >/dev/null 2>&1; then
+            fastfetch --config ${config.xdg.configHome}/fastfetch/config.jsonc || true
+          elif command -v neofetch >/dev/null 2>&1; then
+            neofetch || true
+          fi
+          export FASTFETCH_SHOWN=1
+        fi
+
+        # oh-my-posh
         eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh \
           --config ${config.home.homeDirectory}/.dotfiles/.config/oh-my-posh/config.yaml)"
       '';
@@ -41,9 +59,10 @@
     # oh-my-posh
     programs.oh-my-posh.enable = true;
     home.file."oh-my-posh" = {
-      target = ".config/oh-my-posh/home.yaml";
+      target = ".config/oh-my-posh/";
       source = config.userSettings.configFiles +
-        "/oh-my-posh/config.yaml";
+        "/oh-my-posh/";
+      recursive = true;
       force = true;
     };
 

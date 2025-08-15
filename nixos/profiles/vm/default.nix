@@ -18,10 +18,12 @@
       windowManager = "";
       browser = "";
       terminal = "wezterm";
+      multiplexor = "zellij";
       font = "fira-code";
       shell = "zsh";
       shellAliases = {
         la = "ls -al --color";
+        zz = "zellij attach -c";
       };
     };
   };
