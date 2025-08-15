@@ -8,6 +8,7 @@ in
     ../../../profiles
     ./languages
     ./shell
+    ./windowManager
   ];
 
   # General

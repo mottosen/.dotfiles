@@ -11,6 +11,7 @@ in
     ./multiplexor
     ./fastfetch
     ./editor
+    ./windowManager
   ];
 
   # Home-manager general
