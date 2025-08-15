@@ -10,6 +10,7 @@ in
     ./terminal
     ./multiplexor
     ./fastfetch
+    ./editor
   ];
 
   # Home-manager general

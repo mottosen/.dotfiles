@@ -6,6 +6,7 @@ in
 {
   imports = [
     ../../../profiles
+    ./languages
     ./shell
   ];
 
