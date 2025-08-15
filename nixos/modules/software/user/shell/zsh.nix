@@ -2,10 +2,6 @@
 
 {
   config = lib.mkIf (config.userSettings.shell == "zsh") {
-    home.packages = [
-      pkgs.oh-my-posh
-    ];
-
     programs.zsh = {
       enable = true;
       enableCompletion = true;
@@ -17,12 +13,19 @@
       };
       shellAliases = config.userSettings.shellAliases;
 
-      initExtra = ''
+      initContent = ''
         eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh \
-          --config ${config.xdg.configHome}/oh-my-posh/config.yaml)"
+          --config ${config.home.homeDirectory}/.dotfiles/.config/oh-my-posh/config.yaml)"
       '';
     };
 
-    xdg.configFile."oh-my-posh/config.yaml".source = config.userSettings.configFiles + /oh-my-posh/config.yaml;
+    # oh-my-posh
+    programs.oh-my-posh.enable = true;
+    home.file."oh-my-posh" = {
+      target = ".config/oh-my-posh/home.yaml";
+      source = config.userSettings.configFiles +
+        "/oh-my-posh/config.yaml";
+      force = true;
+    };
   };
 }

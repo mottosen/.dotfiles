@@ -19,9 +19,7 @@ in
     packages = with pkgs; [
       nerd-fonts."${font}"
     ];
-    file = {};
   };
 
   fonts.fontconfig.enable = true;
-  xdg.enable = true;
 }
