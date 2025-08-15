@@ -21,6 +21,12 @@
         default = "no-set";
       };
 
+      configFiles = lib.mkOption {
+        description = "Path of external .config directory.";
+        type = lib.types.path;
+        default = ../../.config;
+      };
+
       windowManager = lib.mkOption {
         description = "Windor Manager to use.";
         type = lib.types.str;

@@ -1,4 +1,4 @@
-{ config, config-files, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   config = lib.mkIf (config.userSettings.shell == "zsh") {
@@ -23,6 +23,6 @@
       '';
     };
 
-    xdg.configFile."oh-my-posh/config.yaml".source = config-files + /oh-my-posh/config.yaml;
+    xdg.configFile."oh-my-posh/config.yaml".source = config.userSettings.configFiles + /oh-my-posh/config.yaml;
   };
 }

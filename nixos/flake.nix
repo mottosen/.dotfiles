@@ -16,7 +16,6 @@
 
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${system};
-      config-files = ../.config;
     in
     {
     nixosConfigurations = {
@@ -39,7 +38,6 @@
           ./modules/software/user
         ];
         extraSpecialArgs = {
-          inherit config-files;
           inherit profile;
           inherit system;
         };
