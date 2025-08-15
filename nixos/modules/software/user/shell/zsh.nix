@@ -13,6 +13,25 @@
       };
       shellAliases = config.userSettings.shellAliases;
 
+      oh-my-zsh = {
+        enable = true;
+        #theme = "powerlevel10k/powerlevel10k";
+        plugins = [
+          "git"
+          "sudo"
+          "aws"
+          "kubectl"
+          "kubectx"
+        ];
+      };
+
+      plugins = [
+        { name = "zsh-autosuggestions";     src = pkgs.zsh-autosuggestions; }
+        { name = "zsh-syntax-highlighting"; src = pkgs.zsh-syntax-highlighting; }
+        { name = "zsh-completions";         src = pkgs.zsh-completions; }
+        { name = "fzf-tab";                 src = pkgs.zsh-fzf-tab; }
+      ];
+
       initContent = ''
         eval "$(${pkgs.oh-my-posh}/bin/oh-my-posh init zsh \
           --config ${config.home.homeDirectory}/.dotfiles/.config/oh-my-posh/config.yaml)"
@@ -26,6 +45,17 @@
       source = config.userSettings.configFiles +
         "/oh-my-posh/config.yaml";
       force = true;
+    };
+
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [ "--cmd" "cd" ];
     };
   };
 }
