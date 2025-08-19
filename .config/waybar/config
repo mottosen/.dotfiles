@@ -3,21 +3,20 @@
     "layer": "top",
     "position": "top",
     "height": 30,
-    "width": 1280,
-    "margin-top": 16,
+    "margin-top": 10,
     "reload_style_on_change": true,
 
     "modules-left": [
-        "hyprland/workspaces",
+        "clock",
         "custom/media"
     ],
     "modules-center": [
+        "hyprland/workspaces",
     ],
     "modules-right": [
         "pulseaudio",
         "network",
         "battery",
-        "clock",
     ],
 
     "hyprland/workspaces": {

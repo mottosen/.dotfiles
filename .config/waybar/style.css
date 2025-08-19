@@ -1,180 +1,98 @@
+@import "colors.css";
+
+/* General */
 * {
-    font-family: 'Fira Code Nerd Font Mono', sans-serif;
-    font-size: 13px;
-    border-radius: 10px;
+  font-family: 'Fira Code Nerd Font Mono', sans-serif;
+  font-size: 14px;
+  border-radius: 10px;
 }
 
 window#waybar {
-    background-color: transparent;
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .2s;
+  background-color: transparent; /* keep translucency via compositor */
+  transition-duration: .1s;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
-}
+button { border: none; border-radius: 0; }
+button:hover { border: none; background: inherit; }
 
-button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
-    border: none;
-    border-radius: 0;
-}
-
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
-    background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
-/* you can set a style on hover for any module like this */
-#pulseaudio:hover {
-    background-color: #a37800;
-}
-
-#workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
-}
-
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#workspaces button.active {
-    box-shadow: inset 0 -1px #ffffff;
-}
-
-#workspaces button.urgent {
-    background-color: #eb4d4b;
-}
-
-#mode {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
-#clock,
-#battery,
-#network,
-#pulseaudio,
-#custom-media {
-    padding: 0 10px;
-    color: #ffffff;
-    margin: 0 5px;
-}
-
-#window,
+/* Workspaces */
 #workspaces {
-    margin: 0 4px;
+  margin: 0 4px;
+  background-color: @primary_container;
+  color: @on_primary_container;
+  border-radius: 10px;
+}
+#workspaces button {
+  padding: 0 5px;
+  background-color: transparent;
+  color: @on_surface;
+}
+#workspaces button:hover {
+  background-color: @inverse_primary;
+  border-radius: 100%;
+}
+#workspaces button.active {
+  box-shadow: inset 0px -2px @primary;
+}
+#workspaces button.urgent {
+  background-color: @error_container;
+  color: @on_error_container;
 }
 
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
+/* Common module chip */
+#clock, #battery, #network, #pulseaudio, #custom-media {
+  padding: 0 10px;
+  margin: 0 5px;
+  background: @surface_container_low;
+  color: @on_surface;
 }
 
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
+/* Clock as inverse callout */
 #clock {
-    background-color: #64727D;
+  background-color: @inverse_primary;
+  color: @inverse_surface;
 }
 
-#battery {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-#battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-/* Using steps() instead of linear as a timing function to limit cpu usage */
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-label:focus {
-    background-color: #000000;
-}
-
+/* Network */
 #network {
-    background-color: #2980b9;
+  background-color: @secondary_container;
+  color: @on_secondary_container;
 }
-
 #network.disconnected {
-    background-color: #f53c3c;
+  background-color: @error_container;
+  color: @on_error_container;
 }
 
+/* Audio */
 #pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
+  background-color: @secondary_container;
+  color: @on_secondary_container;
 }
 
-#pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+/* Battery */
+#battery {
+  background-color: @secondary_container;
+  color: @on_secondary_container;
+}
+@keyframes blink {
+  to { background-color: @on_error_container; color: @error_container; }
+}
+#battery.critical:not(.charging) {
+  background-color: @error_container;
+  color: @on_error_container;
+  animation: blink 0.6s steps(12) infinite alternate;
 }
 
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
-}
-
+/* Media chips */
+#custom-media { min-width: 120px; }
 #custom-media.custom-spotify {
-    background-color: #66cc99;
+  background-color: @tertiary_container;
+  color: @on_tertiary_container;
 }
-
 #custom-media.custom-vlc {
-    background-color: #ffa000;
+  background-color: @secondary_container;
+  color: @on_secondary_container;
 }
 
-#language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#privacy {
-    padding: 0;
-}
-
-#privacy-item {
-    padding: 0 5px;
-    color: white;
-}
-
-#privacy-item.screenshare {
-    background-color: #cf5700;
-}
-
-#privacy-item.audio-in {
-    background-color: #1ca000;
-}
-
-#privacy-item.audio-out {
-    background-color: #0069d4;
-}
+.modules-left { margin-left: 150px; }
+.modules-right { margin-right: 150px; }
