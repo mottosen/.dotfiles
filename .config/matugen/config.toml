@@ -24,3 +24,8 @@ output_path = '~/.config/btop/themes/matugen.theme'
 input_path = './templates/pywalfox-colors.json'
 output_path = '~/.cache/wal/colors.json'
 post_hook = 'pywalfox update'
+
+
+[templates.wezterm]
+input_path = './templates/wezterm.lua.tmpl'
+output_path = '~/.config/wezterm/colors.lua'
