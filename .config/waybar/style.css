@@ -17,7 +17,8 @@ button:hover { border: none; background: inherit; }
 
 /* Workspaces */
 #workspaces {
-  margin: 0 4px;
+  margin: 0 0;
+  padding: 0 10px;
   background-color: @primary_container;
   color: @on_primary_container;
   border-radius: 10px;
@@ -39,41 +40,13 @@ button:hover { border: none; background: inherit; }
   color: @on_error_container;
 }
 
-/* Common module chip */
 #clock, #battery, #network, #pulseaudio, #custom-media {
   padding: 0 10px;
   margin: 0 5px;
-  background: @surface_container_low;
-  color: @on_surface;
-}
-
-/* Clock as inverse callout */
-#clock {
-  background-color: @inverse_primary;
-  color: @inverse_surface;
-}
-
-/* Network */
-#network {
-  background-color: @secondary_container;
-  color: @on_secondary_container;
-}
-#network.disconnected {
-  background-color: @error_container;
-  color: @on_error_container;
-}
-
-/* Audio */
-#pulseaudio {
-  background-color: @secondary_container;
+  background: @secondary_container;
   color: @on_secondary_container;
 }
 
-/* Battery */
-#battery {
-  background-color: @secondary_container;
-  color: @on_secondary_container;
-}
 @keyframes blink {
   to { background-color: @on_error_container; color: @error_container; }
 }
@@ -81,17 +54,6 @@ button:hover { border: none; background: inherit; }
   background-color: @error_container;
   color: @on_error_container;
   animation: blink 0.6s steps(12) infinite alternate;
-}
-
-/* Media chips */
-#custom-media { min-width: 120px; }
-#custom-media.custom-spotify {
-  background-color: @tertiary_container;
-  color: @on_tertiary_container;
-}
-#custom-media.custom-vlc {
-  background-color: @secondary_container;
-  color: @on_secondary_container;
 }
 
 .modules-left { margin-left: 150px; }
