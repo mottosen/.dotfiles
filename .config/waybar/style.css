@@ -2,8 +2,8 @@
 
 /* General */
 * {
-  font-family: 'Fira Code Nerd Font Mono', sans-serif;
-  font-size: 14px;
+  font-family: 'IntoneMono Nerd Font', sans-serif;
+  font-size: 15px;
   border-radius: 10px;
 }
 
@@ -18,7 +18,7 @@ button:hover { border: none; background: inherit; }
 /* Workspaces */
 #workspaces {
   margin: 0 0;
-  padding: 0 10px;
+  padding: 0 20px;
   background-color: @primary_container;
   color: @on_primary_container;
   border-radius: 10px;
@@ -41,7 +41,7 @@ button:hover { border: none; background: inherit; }
 }
 
 #clock, #battery, #network, #pulseaudio, #custom-media {
-  padding: 0 10px;
+  padding: 0 20px;
   margin: 0 5px;
   background: @secondary_container;
   color: @on_secondary_container;
