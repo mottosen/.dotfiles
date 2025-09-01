@@ -1,3 +1,7 @@
+[user]
+	name = Marius
+	email = business@mottosen.xyz
+
 [core]
     compression = 9
     whitespace = error
