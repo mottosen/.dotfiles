@@ -13,7 +13,7 @@ user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1757074588)
 user_pref("app.update.lastUpdateTime.background-update-timer", 1757074588);
 user_pref("app.update.lastUpdateTime.xpi-signature-verification", 1757074588);
 user_pref("browser.laterrun.bookkeeping.profileCreationTime", 1757074558);
-user_pref("browser.laterrun.bookkeeping.sessionCount", 4);
+user_pref("browser.laterrun.bookkeeping.sessionCount", 5);
 user_pref("browser.laterrun.enabled", true);
 user_pref("browser.startup.homepage_override.buildID", "20240801134912");
 user_pref("browser.startup.homepage_override.mstone", "115.14.0");
@@ -24,6 +24,7 @@ user_pref("extensions.lastAppBuildId", "20250316033147");
 user_pref("extensions.lastAppVersion", "7.0.15");
 user_pref("extensions.lastPlatformVersion", "115.14.0");
 user_pref("extensions.systemAddonSet", "{\"schema\":1,\"addons\":{}}");
+user_pref("extensions.zotero.automaticTags", false);
 user_pref("extensions.zotero.dataDir", "/home/marius/Zotero");
 user_pref("extensions.zotero.firstRun.skipFirefoxProfileAccessCheck", true);
 user_pref("extensions.zotero.firstRun2", false);
