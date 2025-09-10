@@ -8,15 +8,47 @@
 
     "modules-left": [
         "clock",
+        "custom/uair",
     ],
     "modules-center": [
         "hyprland/workspaces",
     ],
     "modules-right": [
+        "hyprland/language",
         "pulseaudio",
         "network",
         "battery",
     ],
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "custom/uair": {
+      "format": "{icon} {}",
+      "format-icons": [
+        "●●●●●●●●●●",
+        "●●●●●●●●●○",
+        "●●●●●●●●○○",
+        "●●●●●●●○○○",
+        "●●●●●●○○○○",
+        "●●●●●○○○○○",
+        "●●●●○○○○○○",
+        "●●○○○○○○○○",
+        "●○○○○○○○○○",
+        "○○○○○○○○○○",
+      ],
+      "tooltip": false,
+      "return-type": "json",
+      "interval": 1,
+      "on-click": "uairctl toggle",
+      "on-click-right": "uairctl finish",
+      "on-scroll-down": "uairctl prev",
+      "on-scroll-up": "uairctl next",
+      "exec-if": "which uairctl",
+      "exec": "uairctl fetch '{\"text\":\"{name}\",\"class\":\"{state}\",\"percentage\":{percent}}'"
+    },
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -31,28 +63,8 @@
         },
     },
 
-    "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-
-    "battery": {
-        "states": {
-            "good": 85,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "",
-        "format-icons": ["󰁺", "󰁾", "󰂀", "󰁹"]
-    },
-
-    "network": {
-        "format-wifi": "{essid} ",
-        "format-ethernet": "{essid} 󰌗",
-        "format-disconnected": "Disconnected ⚠",
-        "tooltip-format": "{ifname} via {gwaddr}",
+    "hyprland/language": {
+        "format": "{}",
     },
 
     "pulseaudio": {
@@ -66,5 +78,24 @@
             "default": ["󰕿", "󰖀", "󰕾"],
         },
         "on-click": "pavucontrol"
+    },
+
+    "network": {
+        "format-wifi": "{essid} ",
+        "format-ethernet": "{essid} 󰌗",
+        "format-disconnected": "Disconnected ⚠",
+        "tooltip-format": "{ifname} via {gwaddr}",
+    },
+
+    "battery": {
+        "states": {
+            "good": 85,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "",
+        "format-icons": ["󰁺", "󰁾", "󰂀", "󰁹"]
     },
 }

@@ -15,6 +15,9 @@ window#waybar {
 button { border: none; border-radius: 0; }
 button:hover { border: none; background: inherit; }
 
+.modules-left { margin-left: 150px; }
+.modules-right { margin-right: 150px; }
+
 /* Workspaces */
 #workspaces {
   margin: 0 0;
@@ -40,11 +43,15 @@ button:hover { border: none; background: inherit; }
   color: @on_error_container;
 }
 
-#clock, #battery, #network, #pulseaudio, #custom-media {
+#clock, #custom-uair, #language, #pulseaudio, #network, #battery {
   padding: 0 20px;
   margin: 0 5px;
   background: @secondary_container;
   color: @on_secondary_container;
+}
+
+#custom-uair.resumed {
+  background: @inverse_primary;
 }
 
 @keyframes blink {
@@ -55,6 +62,3 @@ button:hover { border: none; background: inherit; }
   color: @on_error_container;
   animation: blink 0.6s steps(12) infinite alternate;
 }
-
-.modules-left { margin-left: 150px; }
-.modules-right { margin-right: 150px; }
