@@ -29,3 +29,9 @@ post_hook = 'pywalfox update'
 [templates.wezterm]
 input_path = './templates/wezterm.lua.tmpl'
 output_path = '~/.config/wezterm/colors.lua'
+
+
+[templates.mako]
+input_path = './templates/mako-colors.conf'
+output_path = '~/.config/mako/colors.conf'
+post_hook = 'makoctl reload'
