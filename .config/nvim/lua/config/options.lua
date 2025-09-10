@@ -7,6 +7,7 @@
 vim.g.have_nerd_font = true
 
 vim.opt.encoding = "utf-8"
+vim.opt.termguicolors = true
 
 -- Make relative line numbers default
 vim.opt.number = true
