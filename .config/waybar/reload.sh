@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-killall -r waybar
+killall waybar
 waybar &
