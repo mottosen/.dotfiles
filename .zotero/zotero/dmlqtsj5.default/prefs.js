@@ -10,10 +10,10 @@
 // - set it within a user.js file in your profile.
 
 user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1758721661);
-user_pref("app.update.lastUpdateTime.background-update-timer", 1758704304);
+user_pref("app.update.lastUpdateTime.background-update-timer", 1758789128);
 user_pref("app.update.lastUpdateTime.xpi-signature-verification", 1758721661);
 user_pref("browser.laterrun.bookkeeping.profileCreationTime", 1757074558);
-user_pref("browser.laterrun.bookkeeping.sessionCount", 15);
+user_pref("browser.laterrun.bookkeeping.sessionCount", 16);
 user_pref("browser.laterrun.enabled", true);
 user_pref("browser.startup.homepage_override.buildID", "20240801134912");
 user_pref("browser.startup.homepage_override.mstone", "115.14.0");
@@ -32,7 +32,7 @@ user_pref("extensions.zotero.firstRun2", false);
 user_pref("extensions.zotero.ignoreLegacyDataDir.auto", true);
 user_pref("extensions.zotero.lastCreatorFieldMode", 1);
 user_pref("extensions.zotero.lastSelectedPrefPane", "zotero-prefpane-general");
-user_pref("extensions.zotero.lastViewedFolder", "C2");
+user_pref("extensions.zotero.lastViewedFolder", "C4");
 user_pref("extensions.zotero.newItemTypeMRU", "blogPost,conferencePaper,newspaperArticle,journalArticle");
 user_pref("extensions.zotero.pane.persist", "{\"zotero-reader-sidebar-pane\":{\"collapsed\":\"false\",\"width\":\"240\"},\"zotero-layout-switcher\":{\"orient\":\"horizontal\"},\"zotero-items-splitter\":{\"orient\":\"horizontal\"},\"zotero-item-pane\":{\"width\":\"337\",\"height\":\"205\"},\"zotero-context-splitter\":{\"state\":\"\"},\"zotero-context-splitter-stacked\":{\"state\":\"open\"}}");
 user_pref("extensions.zotero.panes.abstract.open", true);
