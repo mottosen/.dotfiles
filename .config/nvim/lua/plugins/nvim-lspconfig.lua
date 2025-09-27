@@ -219,7 +219,6 @@ return {
 			bashls = {},
 			sqlls = {},
 			pylsp = {},
-			omnisharp = {},
 
 			clangd = {
 				-- keys = {
@@ -284,25 +283,58 @@ return {
 		-- for you, so that they are available from within Neovim.
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			"stylua",
-			"prettierd",
-			"prettier",
-			"isort",
-			"black",
-			"sqlfmt",
-			"cpplint",
-			"clang-format",
-			--"cmakelint",
-			--"cmakelang",
-			--"codelldb",
-			--"cpptools",
-			"csharpier",
+            -- LSPs
+            "bashls", -- bash
+            --"omnisharp", -- C#
+            "clangd", -- clangd
+            "cmake", -- cmake
+            "docker_language_server", -- docker (file/compose)
+            "hls", -- haskell
+            "biome", -- json, js, ts
+            "ltex_plus", -- LaTeX
+            "lua_ls", -- lua
+            "markdown-oxide", -- markdown
+            "nil_ls", -- nix
+            "pylsp", -- python
+            "sqlls", -- SQL
+            "terraformls", -- terraform
+            "yamlls", -- yaml
+            "nginx_language_server", -- nginx
+
+            -- Formatters
+            "shellcheck",
+            "beautysh",
+            "sonarlint-language-server",
+            "csharpier",
+            "clang-format",
+            "cmakelang",
+            "fantomas",
+            "hlint",
+            "fourmolu",
+            "biome",
+            "prettierd",
+            "prettier",
+            "stylua",
+            "tex-fmt",
+            "bibtex-tidy",
+            "checkmake",
+            "markdownlint",
+            "nixfmt",
+            "isort",
+            "black",
+            "sqlfluff",
+            "sqlfmt",
+            "terraform",
+            "nginx-config-formatter",
 		})
-		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+		require("mason-tool-installer").setup({
+            ensure_installed = ensure_installed,
+            auto_update = true,
+        })
 
 		require("mason-lspconfig").setup({
 			ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-			automatic_installation = false,
+			automatic_installation = true,
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}

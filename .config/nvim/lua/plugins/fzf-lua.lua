@@ -90,7 +90,7 @@ return {
 		{
 			"<leader>fs",
 			function()
-				require("fzf-lua").live_grep_glob()
+				require("fzf-lua").live_grep()
 			end,
 			desc = "[F]uzzy [S]earch in CWD.",
 		},

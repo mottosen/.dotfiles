@@ -28,6 +28,9 @@ return {
 				"make",
 				"nginx",
 				"python",
+                "json",
+                "nix",
+                "yaml",
 			},
 
 			auto_install = true,
