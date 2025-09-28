@@ -9,11 +9,11 @@ dnf_cmd() { command -v dnf5 >/dev/null 2>&1 && echo dnf5 || echo dnf; }
 
 enable_all_repos() {
   local DNF="$(dnf_cmd)"
-  echo "[*] Installing DNF plugin package and enabling third‑party repos..."
+  echo "[*] Installing DNF plugin package and enabling third-party repos..."
 
   # dnf plugin package (needed for config-manager & copr)
   if [ "$DNF" = "dnf5" ]; then
-    sudo "$DNF" install -y dnf5-plugins   # provides config-manager, copr, etc.
+    sudo "$DNF" install -y dnf5-plugins
   else
     sudo "$DNF" install -y dnf-plugins-core
   fi
@@ -37,9 +37,10 @@ EOF
     sudo "$DNF" config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
   fi
 
-  # COPRs for Hyprland extras & Bibata cursors
-  sudo "$DNF" copr enable -y solopasha/hyprland
+  # COPRs
+  sudo "$DNF" copr enable -y solopasha/hyprland       # hyprlock, hyprpaper, hyprshot, waypaper, matugen, etc.
   sudo "$DNF" copr enable -y carlwgeorge/bibata-cursor-theme
+  sudo "$DNF" copr enable -y varlad/zellij            # zellij packaged for Fedora
 }
 
 install_all_dnf_packages() {
@@ -47,7 +48,7 @@ install_all_dnf_packages() {
   echo "[*] Installing packages via $DNF in one transaction..."
   sudo "$DNF" install -y \
     # Dev & CLI
-    stow neovim code git fzf ripgrep ranger btop diff-so-fancy \ #net-sdk-9.0
+    stow neovim code dotnet-sdk-9.0 git fzf ripgrep ranger btop diff-so-fancy \
     libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo \
     pcmanfm \
     # Hyprland stack (Fedora + COPR)
@@ -55,7 +56,9 @@ install_all_dnf_packages() {
     xdg-desktop-portal-hyprland hyprland-plugins hyprland-contrib \
     hypridle hyprlock hyprpaper hyprshot waypaper matugen \
     # Docker CE + plugins
-    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+    # Zellij (from COPR)
+    zellij
 }
 
 install_flatpaks() {
@@ -64,7 +67,8 @@ install_flatpaks() {
   flatpak install -y flathub \
     org.zotero.Zotero \
     org.wezfurlong.wezterm \
-    app.eduroam.geteduroam
+    app.eduroam.geteduroam \
+    app.zen_browser.zen
 }
 
 enable_docker_service() {
@@ -105,10 +109,13 @@ install_pywalfox() {
   pywalfox install || true
 }
 
-# install_pomodoro() {
-#   echo "[*] Installing pomodoro-cli (Waybar-friendly)..."
-#   cargo install --locked pomodoro-cli
-# }
+# ======= Pomodoro choice =======
+# You asked for a non-cargo option; there isn’t a clean Waybar-CLI one.
+# So we keep 'uair' (your original) via cargo, which Waybar can read easily.
+install_uair() {
+  echo "[*] Installing uair (CLI Pomodoro) via cargo ..."
+  cargo install uair
+}
 
 set_zsh_default() {
   echo "[*] Setting Zsh as default shell..."
@@ -116,7 +123,7 @@ set_zsh_default() {
 }
 
 install_lazygit() {
-  # Separate due to COPR volatility; includes fallback to Go build
+  # COPR with fallback to Go build
   local DNF="$(dnf_cmd)"
   echo "[*] Installing lazygit (COPR with fallback)..."
   if sudo "$DNF" copr enable -y dejan/lazygit && sudo "$DNF" install -y lazygit; then
@@ -141,7 +148,7 @@ main() {
   install_nerd_fonts
   apply_dotfiles
   install_pywalfox
-  install_pomodoro
+  install_uair   # keep this for Waybar-friendly CLI pomodoro
   install_lazygit
   set_zsh_default
   echo "✓ Setup complete. Log out/in for Docker group and default shell to take effect."
