@@ -164,15 +164,21 @@ set_zsh_default() {
 }
 
 config_zsa() {
+  echo "[*] Configuring zsa udev rules..."
   sudo cp "$HOME/.dotfiles/udev-rules/zsa_voyager" "/etc/udev/rules.d/50-zsa.rules"
   sudo groupadd plugdev 2>/dev/null || true
   sudo usermod -aG plugdev "$USER"
 }
 
 config_bibata_cursors() {
+  echo "[*] Configuring bibata cursors..."
+  # download icon files
   cd "$HOME/Downloads"
   curl -L -o Bibata.tar.xz \
     https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata.tar.xz
+
+  # extract icon files
+  mkdir "$HOME/.icons"
   tar -xf Bibata.tar.xz -C "$HOME/.icons"
 }
 
