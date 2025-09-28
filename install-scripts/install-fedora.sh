@@ -169,6 +169,13 @@ config_zsa() {
   sudo usermod -aG plugdev "$USER"
 }
 
+config_bibata_cursors() {
+  cd "$HOME/Downloads"
+  curl -L -o Bibata.tar.xz \
+    https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata.tar.xz
+  tar -xf Bibata.tar.xz -C "$HOME/.icons"
+}
+
 main() {
   sudo "$(dnf_cmd)" upgrade -y
   enable_all_repos
@@ -184,6 +191,7 @@ main() {
   apply_dotfiles
   set_zsh_default
   config_zsa
+  config_bibata_cursors
   echo "✓ Setup complete. Log out/in for Docker group and default shell to take effect."
 }
 main "$@"
