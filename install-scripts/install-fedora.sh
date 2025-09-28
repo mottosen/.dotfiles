@@ -52,7 +52,6 @@ EOF
 
   # --- COPRs (idempotent; re-enabling is fine) ---
   sudo "$DNF" copr enable -y solopasha/hyprland
-  sudo "$DNF" copr enable -y peterwu/rendezvous
   sudo "$DNF" copr enable -y varlad/zellij
 }
 
@@ -63,11 +62,11 @@ install_all_dnf_packages() {
   DNF_PACKAGES=(
     # Dev & CLI
     stow neovim code git fzf ripgrep ranger btop diff-so-fancy dotnet-sdk-9.0
-    libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo
+    libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo libusb
     pcmanfm kitty zellij @development-tools gcc gcc-c++ make perl tar xz
 
     # Hyprland stack (Fedora + COPR)
-    hyprland hyprcursor waybar wofi bibata-cursor-themes
+    hyprland hyprcursor waybar wofi
     xdg-desktop-portal-hyprland hyprland-plugins hyprland-contrib
     hypridle hyprlock hyprpaper hyprshot waypaper matugen mako
 
@@ -164,6 +163,12 @@ set_zsh_default() {
   chsh -s "$(command -v zsh)" "$USER"
 }
 
+config_zsa() {
+  sudo cp ../udev-rules/zsa_voyager /etc/udev/rules.d/50-zsa.rules
+  sudo groupadd plugdev 2>/dev/null || true
+  sudo usermod -aG plugdev "$USER"
+}
+
 main() {
   sudo "$(dnf_cmd)" upgrade -y
   enable_all_repos
@@ -178,6 +183,7 @@ main() {
   enable_docker_service
   apply_dotfiles
   set_zsh_default
+  config_zsa
   echo "✓ Setup complete. Log out/in for Docker group and default shell to take effect."
 }
 main "$@"
