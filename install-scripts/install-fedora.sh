@@ -18,9 +18,12 @@ enable_all_repos() {
     sudo "$DNF" install -y dnf-plugins-core
   fi
 
-  # Microsoft: .NET & VS Code
-  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-  sudo "$DNF" install -y https://packages.microsoft.com/config/fedora/42/packages-microsoft-prod.rpm
+  # --- Microsoft repo: import key + install repo FIRST, then refresh ---
+  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc || true
+  if ! rpm -q packages-microsoft-prod >/dev/null 2>&1; then
+    sudo "$DNF" install -y https://packages.microsoft.com/config/fedora/42/packages-microsoft-prod.rpm
+  fi
+  # ensure VS Code repo file exists (idempotent)
   sudo tee /etc/yum.repos.d/vscode.repo >/dev/null <<'EOF'
 [code]
 name=Visual Studio Code
@@ -30,17 +33,27 @@ gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
 
-  # Docker CE repo
-  if [ "$DNF" = "dnf5" ]; then
-    sudo "$DNF" config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+  # Clean & refresh AFTER keys/repos are present to avoid transient GPG errors
+  sudo "$DNF" clean all
+  sudo "$DNF" makecache -y || true
+
+  # --- Docker CE repo: add only if missing (dnf5 complains otherwise) ---
+  if [ ! -f /etc/yum.repos.d/docker-ce.repo ]; then
+    if [ "$DNF" = "dnf5" ]; then
+      sudo "$DNF" config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+    else
+      sudo "$DNF" config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    fi
   else
-    sudo "$DNF" config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    echo "  - Docker repo already exists; skipping add."
+    # If you ever need to refresh it instead, uncomment:
+    # [ "$DNF" = "dnf5" ] && sudo "$DNF" config-manager addrepo --overwrite --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
   fi
 
-  # COPRs
-  sudo "$DNF" copr enable -y solopasha/hyprland       # hyprlock, hyprpaper, hyprshot, waypaper, matugen, etc.
+  # --- COPRs (idempotent; re-enabling is fine) ---
+  sudo "$DNF" copr enable -y solopasha/hyprland
   sudo "$DNF" copr enable -y carlwgeorge/bibata-cursor-theme
-  sudo "$DNF" copr enable -y varlad/zellij            # zellij packaged for Fedora
+  sudo "$DNF" copr enable -y varlad/zellij
 }
 
 install_all_dnf_packages() {
