@@ -62,7 +62,7 @@ install_all_dnf_packages() {
 
   DNF_PACKAGES=(
     # Dev & CLI
-    stow neovim code git fzf ripgrep ranger btop diff-so-fancy # dotnet-sdk-9.0
+    stow neovim code git fzf ripgrep ranger btop diff-so-fancy dotnet-sdk-9.0
     libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo
     pcmanfm
 
