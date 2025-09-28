@@ -64,7 +64,7 @@ install_all_dnf_packages() {
     # Dev & CLI
     stow neovim code git fzf ripgrep ranger btop diff-so-fancy dotnet-sdk-9.0
     libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo
-    pcmanfm zellij @development-tools gcc gcc-c++ make perl tar xz
+    pcmanfm kitty zellij @development-tools gcc gcc-c++ make perl tar xz
 
     # Hyprland stack (Fedora + COPR)
     hyprland hyprcursor waybar wofi
