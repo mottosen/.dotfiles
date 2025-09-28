@@ -22,5 +22,5 @@ _darcs
 ^/LICENSE.*
 ^/COPYING
 
-nixos
-default_wallpaper.jpg
+wallpaper.jpg
+install-scripts
