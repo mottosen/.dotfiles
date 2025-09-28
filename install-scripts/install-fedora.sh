@@ -164,7 +164,7 @@ set_zsh_default() {
 }
 
 config_zsa() {
-  sudo cp ../udev-rules/zsa_voyager /etc/udev/rules.d/50-zsa.rules
+  sudo cp "$HOME/.dotfiles/udev-rules/zsa_voyager" "/etc/udev/rules.d/50-zsa.rules"
   sudo groupadd plugdev 2>/dev/null || true
   sudo usermod -aG plugdev "$USER"
 }
