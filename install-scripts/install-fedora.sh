@@ -46,19 +46,26 @@ EOF
 install_all_dnf_packages() {
   local DNF="$(dnf_cmd)"
   echo "[*] Installing packages via $DNF in one transaction..."
-  sudo "$DNF" install -y \
+
+  DNF_PACKAGES=(
     # Dev & CLI
-    stow neovim code dotnet-sdk-9.0 git fzf ripgrep ranger btop diff-so-fancy \
-    libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo \
-    pcmanfm \
+    stow neovim code git fzf ripgrep ranger btop diff-so-fancy # dotnet-sdk-9.0
+    libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo
+    pcmanfm
+
     # Hyprland stack (Fedora + COPR)
-    hyprland hyprcursor waybar wofi \
-    xdg-desktop-portal-hyprland hyprland-plugins hyprland-contrib \
-    hypridle hyprlock hyprpaper hyprshot waypaper matugen \
+    hyprland hyprcursor waybar wofi
+    xdg-desktop-portal-hyprland hyprland-plugins hyprland-contrib
+    hypridle hyprlock hyprpaper hyprshot waypaper matugen
+
     # Docker CE + plugins
-    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
     # Zellij (from COPR)
     zellij
+  )
+
+  sudo "$DNF" install -y "${DNF_PACKAGES[@]}"
 }
 
 install_flatpaks() {
