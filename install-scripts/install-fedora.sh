@@ -69,7 +69,7 @@ install_all_dnf_packages() {
     # Hyprland stack (Fedora + COPR)
     hyprland hyprcursor waybar wofi
     xdg-desktop-portal-hyprland hyprland-plugins hyprland-contrib
-    hypridle hyprlock hyprpaper hyprshot waypaper matugen
+    hypridle hyprlock hyprpaper hyprshot waypaper matugen mako
 
     # Docker CE + plugins
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
