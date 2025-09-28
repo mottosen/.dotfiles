@@ -294,7 +294,6 @@ return {
             "ltex_plus", -- LaTeX
             "lua_ls", -- lua
             "markdown-oxide", -- markdown
-            "nil_ls", -- nix
             "pylsp", -- python
             "sqlls", -- SQL
             "terraformls", -- terraform
@@ -319,7 +318,6 @@ return {
             "bibtex-tidy",
             "checkmake",
             "markdownlint",
-            "nixfmt",
             "isort",
             "black",
             "sqlfluff",
