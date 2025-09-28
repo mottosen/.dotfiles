@@ -52,7 +52,7 @@ EOF
 
   # --- COPRs (idempotent; re-enabling is fine) ---
   sudo "$DNF" copr enable -y solopasha/hyprland
-  sudo "$DNF" copr enable -y carlwgeorge/bibata-cursor-theme
+  sudo "$DNF" copr enable -y peterwu/rendezvous
   sudo "$DNF" copr enable -y varlad/zellij
 }
 
@@ -67,7 +67,7 @@ install_all_dnf_packages() {
     pcmanfm kitty zellij @development-tools gcc gcc-c++ make perl tar xz
 
     # Hyprland stack (Fedora + COPR)
-    hyprland hyprcursor waybar wofi
+    hyprland hyprcursor waybar wofi bibata-cursor-themes
     xdg-desktop-portal-hyprland hyprland-plugins hyprland-contrib
     hypridle hyprlock hyprpaper hyprshot waypaper matugen mako
 
