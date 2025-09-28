@@ -64,7 +64,7 @@ install_all_dnf_packages() {
     # Dev & CLI
     stow neovim code git fzf ripgrep ranger btop diff-so-fancy dotnet-sdk-9.0
     libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo
-    pcmanfm
+    pcmanfm @development-tools gcc gcc-c++ make perl tar xz
 
     # Hyprland stack (Fedora + COPR)
     hyprland hyprcursor waybar wofi
@@ -91,12 +91,6 @@ install_flatpaks() {
     app.zen_browser.zen
 }
 
-enable_docker_service() {
-  echo "[*] Enabling Docker service and group..."
-  sudo systemctl enable --now docker
-  sudo usermod -aG docker "$USER" || true
-}
-
 install_devbox() {
   echo "[*] Installing Devbox..."
   curl -fsSL https://get.jetify.com/devbox | bash
@@ -114,14 +108,6 @@ install_nerd_fonts() {
   fc-cache -f "$HOME/.local/share/fonts"
 }
 
-apply_dotfiles() {
-  echo "[*] Applying dotfiles from ~/.dotfiles with GNU Stow..."
-  local DOTDIR="$HOME/.dotfiles"
-  [ -d "$DOTDIR" ] || { echo "  - Skipping: $DOTDIR not found."; return 0; }
-  cd "$DOTDIR"
-  stow --adopt .
-}
-
 install_pywalfox() {
   echo "[*] Installing pywalfox via pipx..."
   pipx ensurepath
@@ -129,17 +115,9 @@ install_pywalfox() {
   pywalfox install || true
 }
 
-# ======= Pomodoro choice =======
-# You asked for a non-cargo option; there isn’t a clean Waybar-CLI one.
-# So we keep 'uair' (your original) via cargo, which Waybar can read easily.
 install_uair() {
   echo "[*] Installing uair (CLI Pomodoro) via cargo ..."
   cargo install uair
-}
-
-set_zsh_default() {
-  echo "[*] Setting Zsh as default shell..."
-  chsh -s "$(command -v zsh)" "$USER"
 }
 
 install_lazygit() {
@@ -158,18 +136,51 @@ install_lazygit() {
   fi
 }
 
+install_haskell_toolchain() {
+  echo "[*] Installing Haskell toolchain via ghcup (non-interactive)..."
+  export BOOTSTRAP_HASKELL_NONINTERACTIVE=1
+  export BOOTSTRAP_HASKELL_MINIMAL=1   # set to 0 if you also want stack, etc.
+  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | bash
+
+  # Use ghcup to install recommended versions
+  "$HOME/.ghcup/bin/ghcup" install ghc recommended
+  "$HOME/.ghcup/bin/ghcup" set ghc recommended
+  "$HOME/.ghcup/bin/ghcup" install cabal recommended
+  "$HOME/.ghcup/bin/ghcup" install hls recommended
+}
+
+enable_docker_service() {
+  echo "[*] Enabling Docker service and group..."
+  sudo systemctl enable --now docker
+  sudo usermod -aG docker "$USER" || true
+}
+
+apply_dotfiles() {
+  echo "[*] Applying dotfiles from ~/.dotfiles with GNU Stow..."
+  local DOTDIR="$HOME/.dotfiles"
+  [ -d "$DOTDIR" ] || { echo "  - Skipping: $DOTDIR not found."; return 0; }
+  cd "$DOTDIR"
+  stow --adopt .
+}
+
+set_zsh_default() {
+  echo "[*] Setting Zsh as default shell..."
+  chsh -s "$(command -v zsh)" "$USER"
+}
+
 main() {
   sudo "$(dnf_cmd)" upgrade -y
   enable_all_repos
   install_all_dnf_packages
   install_flatpaks
-  enable_docker_service
   install_devbox
   install_nerd_fonts
-  apply_dotfiles
   install_pywalfox
   install_uair   # keep this for Waybar-friendly CLI pomodoro
   install_lazygit
+  install_haskell_toolchain
+  enable_docker_service
+  apply_dotfiles
   set_zsh_default
   echo "✓ Setup complete. Log out/in for Docker group and default shell to take effect."
 }
