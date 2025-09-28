@@ -64,7 +64,7 @@ install_all_dnf_packages() {
     # Dev & CLI
     stow neovim code git fzf ripgrep ranger btop diff-so-fancy dotnet-sdk-9.0
     libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo
-    pcmanfm @development-tools gcc gcc-c++ make perl tar xz
+    pcmanfm zellij @development-tools gcc gcc-c++ make perl tar xz
 
     # Hyprland stack (Fedora + COPR)
     hyprland hyprcursor waybar wofi
@@ -73,9 +73,6 @@ install_all_dnf_packages() {
 
     # Docker CE + plugins
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-    # Zellij (from COPR)
-    zellij
   )
 
   sudo "$DNF" install -y "${DNF_PACKAGES[@]}"
@@ -86,7 +83,6 @@ install_flatpaks() {
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   flatpak install -y flathub \
     org.zotero.Zotero \
-    org.wezfurlong.wezterm \
     app.eduroam.geteduroam \
     app.zen_browser.zen
 }
@@ -97,7 +93,7 @@ install_devbox() {
 }
 
 install_nerd_fonts() {
-  echo "[*] Installing Nerd Fonts (JetBrainsMono & FiraCode) to ~/.local/share/fonts/NerdFonts ..."
+  echo "[*] Installing Nerd Fonts to ~/.local/share/fonts/NerdFonts ..."
   local FDIR="$HOME/.local/share/fonts/NerdFonts"
   mkdir -p "$FDIR"
   for font in JetBrainsMono FiraCode; do
