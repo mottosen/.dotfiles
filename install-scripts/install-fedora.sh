@@ -172,7 +172,7 @@ main() {
   install_devbox
   install_nerd_fonts
   install_pywalfox
-  install_uair   # keep this for Waybar-friendly CLI pomodoro
+  install_uair
   install_lazygit
   install_haskell_toolchain
   enable_docker_service
