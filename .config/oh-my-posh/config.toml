@@ -18,6 +18,30 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
+    type = 'python'
+    style = 'plain'
+    background = 'transparent'
+    foreground = 'green'
+    # only renders inside an env, and hides "base"/"system"
+    template = '{{ if .Venv }} 🐍 {{ .Venv }}{{ end }}'
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      fetch_version = false
+      fetch_virtual_env = true
+      display_mode = 'environment'
+      display_default = false
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    background = 'transparent'
+    foreground = 'cyan'
+    # DEVBOX_SHELL_ENABLED=1 inside devbox; show project root if available
+    template = '{{ if .Env.DEVBOX_SHELL_ENABLED }} 📦 ({{ default .Folder .Env.DEVBOX_PROJECT_ROOT }}){{ end }}'
+    [blocks.segments.properties]
+      cache_duration = 'none'
+
+  [[blocks.segments]]
     template = '{{ .Path }}'
     foreground = 'blue'
     background = 'transparent'
