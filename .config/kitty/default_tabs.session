@@ -1,0 +1,7 @@
+new_tab dot
+cd ~/.dotfiles
+launch sh -lc 'nvim .'
+
+
+new_tab home
+cd ~/.dotfiles
