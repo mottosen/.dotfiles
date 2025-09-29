@@ -64,6 +64,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Set Aliases
 alias vh="nvim ."
 alias lg="lazygit"
+alias la="ls -al"
 
 # Shell integrations
 eval "$(fzf --zsh)"
