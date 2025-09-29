@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 killall waybar
-waybar &
+waybar -c ~/.config/waybar/config &
