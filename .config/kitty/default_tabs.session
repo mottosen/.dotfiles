@@ -3,5 +3,6 @@ cd ~/.dotfiles
 launch sh -lc 'nvim .'
 
 
-new_tab home
-cd ~/.dotfiles
+new_tab phd
+cd ~/phd
+launch sh -lc 'nvim .'
