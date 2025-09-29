@@ -65,6 +65,8 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias vh="nvim ."
 alias lg="lazygit"
 alias la="ls -al"
+alias py="python3"
+alias wipe="clear"
 
 # Shell integrations
 eval "$(fzf --zsh)"
