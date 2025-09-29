@@ -63,7 +63,7 @@ install_all_dnf_packages() {
     # Dev & CLI
     stow neovim code git fzf ripgrep ranger btop diff-so-fancy dotnet-sdk-9.0
     libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo libusb
-    pcmanfm kitty zellij python3-pip
+    pcmanfm kitty zellij python3-pip golang
     @development-tools gcc gcc-c++ make perl tar xz
 
     # Hyprland stack (Fedora + COPR)
