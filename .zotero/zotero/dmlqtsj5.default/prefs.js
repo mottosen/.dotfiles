@@ -49,6 +49,8 @@ user_pref("extensions.zotero.panes.notes.open", true);
 user_pref("extensions.zotero.panes.related.open", true);
 user_pref("extensions.zotero.panes.tags.open", true);
 user_pref("extensions.zotero.prefVersion", 13);
+user_pref("extensions.zotero.purge.creators", true);
+user_pref("extensions.zotero.purge.items", true);
 user_pref("extensions.zotero.purge.tags", true);
 user_pref("extensions.zotero.reader.contentDarkMode", false);
 user_pref("extensions.zotero.sourceList.persist", "{\"L1\":true,\"C1\":true,\"P1\":false,\"C6\":true}");
