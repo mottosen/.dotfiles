@@ -219,6 +219,7 @@ return {
 			bashls = {},
 			sqlls = {},
 			pylsp = {},
+			gopls = {},
 
 			clangd = {
 				-- keys = {
