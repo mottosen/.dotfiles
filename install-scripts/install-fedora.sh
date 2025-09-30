@@ -53,6 +53,8 @@ EOF
   # --- COPRs (idempotent; re-enabling is fine) ---
   sudo "$DNF" copr enable -y solopasha/hyprland
   sudo "$DNF" copr enable -y varlad/zellij
+  sudo "$DNF" copr enable -y atim/lazygit
+  sudo "$DNF" copr enable -y atim/lazydocker
 }
 
 install_all_dnf_packages() {
@@ -63,7 +65,7 @@ install_all_dnf_packages() {
     # Dev & CLI
     stow neovim code git fzf ripgrep ranger btop diff-so-fancy dotnet-sdk-9.0
     libnotify brightnessctl fastfetch zsh zoxide oh-my-posh pipx cargo libusb
-    pcmanfm kitty zellij python3-pip golang
+    pcmanfm kitty zellij python3-pip golang lazygit lazydocker
     @development-tools gcc gcc-c++ make perl tar xz
 
     # Hyprland stack (Fedora + COPR)
@@ -114,22 +116,6 @@ install_pywalfox() {
 install_uair() {
   echo "[*] Installing uair (CLI Pomodoro) via cargo ..."
   cargo install uair
-}
-
-install_lazygit() {
-  # COPR with fallback to Go build
-  local DNF="$(dnf_cmd)"
-  echo "[*] Installing lazygit (COPR with fallback)..."
-  if sudo "$DNF" copr enable -y dejan/lazygit && sudo "$DNF" install -y lazygit; then
-    echo "  - Installed lazygit from COPR dejan/lazygit."
-  elif sudo "$DNF" copr enable -y atim/lazygit && sudo "$DNF" install -y lazygit; then
-    echo "  - Installed lazygit from COPR atim/lazygit."
-  else
-    echo "  - Falling back to Go build for lazygit..."
-    sudo "$DNF" install -y golang
-    GOBIN="$HOME/.local/bin" go install github.com/jesseduffield/lazygit@latest
-    echo "  - Installed to $HOME/.local/bin. Ensure it's on your PATH."
-  fi
 }
 
 install_haskell_toolchain() {
@@ -192,7 +178,6 @@ main() {
   install_nerd_fonts
   install_pywalfox
   install_uair
-  install_lazygit
   install_haskell_toolchain
   enable_docker_service
   apply_dotfiles
