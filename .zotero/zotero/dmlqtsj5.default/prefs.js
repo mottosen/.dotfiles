@@ -9,12 +9,11 @@
 // - modify it via the UI (e.g. via about:config in the browser); or
 // - set it within a user.js file in your profile.
 
-user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1759243166);
-user_pref("app.update.lastUpdateTime.background-update-timer", 1759243166);
-user_pref("app.update.lastUpdateTime.xpi-signature-verification", 1759243166);
+user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1760955948);
+user_pref("app.update.lastUpdateTime.background-update-timer", 1760955948);
+user_pref("app.update.lastUpdateTime.xpi-signature-verification", 1760955948);
 user_pref("browser.laterrun.bookkeeping.profileCreationTime", 1757074558);
-user_pref("browser.laterrun.bookkeeping.sessionCount", 23);
-user_pref("browser.laterrun.enabled", true);
+user_pref("browser.laterrun.bookkeeping.sessionCount", 24);
 user_pref("browser.policies.applied", true);
 user_pref("browser.startup.homepage_override.buildID", "20240801134912");
 user_pref("browser.startup.homepage_override.mstone", "115.14.0");
@@ -49,6 +48,8 @@ user_pref("extensions.zotero.panes.notes.open", true);
 user_pref("extensions.zotero.panes.related.open", true);
 user_pref("extensions.zotero.panes.tags.open", true);
 user_pref("extensions.zotero.prefVersion", 13);
+user_pref("extensions.zotero.purge.creators", true);
+user_pref("extensions.zotero.purge.items", true);
 user_pref("extensions.zotero.purge.tags", true);
 user_pref("extensions.zotero.reader.contentDarkMode", false);
 user_pref("extensions.zotero.sourceList.persist", "{\"L1\":true,\"C1\":true,\"P1\":false,\"C6\":true}");
@@ -57,12 +58,12 @@ user_pref("extensions.zotero.sync.reminder.setUp.lastDisplayed", 1757075031);
 user_pref("extensions.zotero.useDataDir", true);
 user_pref("extensions.zoteroOpenOfficeIntegration.lastAttemptedVersion", "7.0.5.SOURCE");
 user_pref("gecko.handlerService.defaultHandlersVersion", 1);
-user_pref("idle.lastDailyNotification", 1759243469);
+user_pref("idle.lastDailyNotification", 1760956125);
 user_pref("intl.accept_languages", "en-US, en");
 user_pref("media.gmp.storage.version.observed", 1);
 user_pref("privacy.purge_trackers.date_in_cookie_database", "0");
-user_pref("privacy.purge_trackers.last_purge", "1759243469509");
+user_pref("privacy.purge_trackers.last_purge", "1760956125892");
 user_pref("security.sandbox.content.tempDirSuffix", "99ff36fa-73be-471b-9d0c-0657b9db3be5");
 user_pref("storage.vacuum.last.content-prefs.sqlite", 1757323509);
 user_pref("storage.vacuum.last.index", 1);
-user_pref("storage.vacuum.last.places.sqlite", 1757074753);
+user_pref("storage.vacuum.last.places.sqlite", 1760367486);
