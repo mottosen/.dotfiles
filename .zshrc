@@ -1,5 +1,5 @@
 # Set PATH var
-export PATH="$HOME/.ghcup/bin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/go:$PATH"
+export PATH="$HOME/.ghcup/bin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/go:$HOME/.local/bin:$PATH"
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -72,6 +72,16 @@ alias ldc="lazydocker"
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+# zellij
+zz() {
+    if zellij list-sessions | grep 'zz'; then
+        zellij attach zz
+    else
+        #zellij --new-session-with-layout zz --session zz
+        zellij --session zz
+    fi
+}
 
 # fastfetch
 if [[ $- == *i* && -z ${FASTFETCH_SHOWN-} ]]; then

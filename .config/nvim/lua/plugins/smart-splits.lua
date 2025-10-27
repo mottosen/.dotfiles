@@ -1,8 +1,7 @@
 return {
 	"mrjones2014/smart-splits.nvim",
 	lazy = false,
-	build = "./kitty/install-kittens.bash",
-	opts = { multiplexer_integration = "kitty" },
+	opts = { multiplexer_integration = "zellij" },
 	config = function()
 		vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
 		vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)

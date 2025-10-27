@@ -1,0 +1,9 @@
+layout {
+    tab name="dot" {
+        pane
+    }
+
+    tab name="phd" {
+        pane
+    }
+}
