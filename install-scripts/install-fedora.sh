@@ -86,7 +86,8 @@ install_flatpaks() {
   flatpak install -y flathub \
     org.zotero.Zotero \
     app.eduroam.geteduroam \
-    app.zen_browser.zen
+    app.zen_browser.zen \
+    md.obsidian.Obsidian
 }
 
 install_devbox() {
