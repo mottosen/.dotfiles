@@ -1,6 +1,12 @@
 # Set PATH var
 export PATH="$HOME/.ghcup/bin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/go:$HOME/.local/bin:$PATH"
 
+# Set env vars
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
+export SUDO_EDITOR="$EDITOR"
+export GIT_EDITOR="$EDITOR"
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -62,12 +68,15 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Set Aliases
+alias vim="nvim"
 alias vh="nvim ."
 alias la="ls -al"
 alias py="python3"
 alias wipe="clear"
 alias lg="lazygit"
 alias ldc="lazydocker"
+alias zls="zellij list-sessions"
+alias zda="zellij delete-all-sessions"
 
 # Shell integrations
 eval "$(fzf --zsh)"
@@ -78,8 +87,7 @@ zz() {
     if zellij list-sessions | grep 'zz'; then
         zellij attach zz
     else
-        #zellij --new-session-with-layout zz --session zz
-        zellij --session zz
+        zellij --new-session-with-layout zz --session zz
     fi
 }
 

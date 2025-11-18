@@ -1,9 +1,20 @@
 layout {
-    tab name="dot" {
-        pane
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
     }
 
-    tab name="phd" {
+    tab name="metrics" cwd="~" split_direction="vertical" {
+        pane command="lazydocker" start_suspended=false focus=true
+        pane command="btop" start_suspended=false
+    }
+
+    tab name="dot" cwd="~/.dotfiles" {
         pane
     }
 }
