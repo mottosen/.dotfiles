@@ -75,6 +75,7 @@ alias py="python3"
 alias wipe="clear"
 alias lg="lazygit"
 alias ldc="lazydocker"
+alias db="devbox"
 alias zls="zellij list-sessions"
 alias zda="zellij delete-all-sessions"
 
