@@ -14,7 +14,7 @@ layout {
         pane command="btop" start_suspended=false
     }
 
-    tab name="dot" cwd="~/.dotfiles" {
+    tab name="config" cwd="~" {
         pane
     }
 }
