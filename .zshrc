@@ -1,5 +1,5 @@
 # Set PATH var
-export PATH="$HOME/.ghcup/bin:$HOME/.cabal/bin:$HOME/.cargo/bin:$HOME/go:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Set env vars
 export EDITOR="nvim"
@@ -70,7 +70,8 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Set Aliases
 alias vim="nvim"
 alias vh="nvim ."
-alias la="ls -al"
+alias l="ls"
+alias ll="ls -al"
 alias py="python3"
 alias wipe="clear"
 alias lg="lazygit"
