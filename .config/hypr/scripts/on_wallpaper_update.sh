@@ -10,4 +10,4 @@ matugen image "$wallpaper"
 
 echo "Matugen colors updated, reloading waybar"
 sleep 1
-bash ../../waybar/reload.sh
+bash ~/.config/waybar/reload.sh
