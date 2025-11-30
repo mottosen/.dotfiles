@@ -7,15 +7,11 @@ return {
 	opts = {
 		formatters_by_ft = {
 			bash = { "shellcheck", "beautysh" },
-			cs = { "sonarlint-language-server", "csharpier" },
 			c = { "sonarlint-language-server", "clang-format" },
 			cmake = { "cmakelang" },
 			docker = { "sonarlint-language-server" },
-			fs = { "fantomas" },
-			haskell = { "hlint", "fourmolu" },
 			json = { "biome", "prettierd", "prettier", stop_after_first = true },
 			kubernetes = { "sonarlint-language-server" },
-			ts = { "biome", "prettierd", "prettier", stop_after_first = true },
 			lua = { "stylua" },
 			latex = { "tex-fmt", "bibtex-tidy" },
 			makefile = { "checkmake" },

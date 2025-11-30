@@ -216,11 +216,6 @@ return {
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
-			bashls = {},
-			sqlls = {},
-			pylsp = {},
-			gopls = {},
-
 			clangd = {
 				-- keys = {
 				-- 	{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
@@ -286,32 +281,25 @@ return {
 		vim.list_extend(ensure_installed, {
 			-- LSPs
 			"bashls", -- bash
-			--"omnisharp", -- C#
 			"clangd", -- clangd
 			"cmake", -- cmake
 			"docker_language_server", -- docker (file/compose)
-			"hls", -- haskell
-			"biome", -- json, js, ts
 			"ltex_plus", -- LaTeX
 			"lua_ls", -- lua
 			"markdown-oxide", -- markdown
+			"nil_ls", -- nix
 			"pylsp", -- python
 			"sqlls", -- SQL
 			"terraformls", -- terraform
 			"yamlls", -- yaml
 			"nginx_language_server", -- nginx
-			"gopls", -- go
 
 			-- Formatters
 			"shellcheck",
 			"beautysh",
 			"sonarlint-language-server",
-			"csharpier",
 			"clang-format",
 			"cmakelang",
-			"fantomas",
-			"hlint",
-			"fourmolu",
 			"biome",
 			"prettierd",
 			"prettier",
@@ -326,6 +314,7 @@ return {
 			"sqlfmt",
 			"terraform",
 			"nginx-config-formatter",
+			"nixfmt",
 		})
 		require("mason-tool-installer").setup({
 			ensure_installed = ensure_installed,
