@@ -8,6 +8,6 @@ ln -s "$wallpaper" "$HOME/wallpaper"
 echo "Wallpaper was updated, running Matugen"
 matugen image "$wallpaper"
 
-echo "Matugen colors updated, reloading waybar"
-sleep 1
-bash ~/.config/waybar/reload.sh
+# echo "Matugen colors updated, reloading waybar"
+# sleep 1
+# ~/.config/waybar/reload.sh
