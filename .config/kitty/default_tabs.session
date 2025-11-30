@@ -1,8 +1,0 @@
-new_tab dot
-cd ~/.dotfiles
-launch sh -lc 'nvim .'
-
-
-new_tab phd
-cd ~/phd
-launch sh -lc 'nvim .'
