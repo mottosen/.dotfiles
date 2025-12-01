@@ -274,4 +274,5 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    vim-zellij-navigator location="file:~/.config/zellij/plugins/vim-zellij-navigator.wasm"
 }
