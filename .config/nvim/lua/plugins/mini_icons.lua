@@ -1,5 +1,5 @@
 return {
-	"echasnovski/mini.icons",
-	version = "*",
-	opts = {},
+    "echasnovski/mini.icons",
+    version = "*",
+    opts = {},
 }

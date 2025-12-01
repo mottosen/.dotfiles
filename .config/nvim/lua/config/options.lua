@@ -21,11 +21,10 @@ vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
---vim.schedule(function()
---  vim.opt.clipboard = 'unnamedplus'
---end)
+vim.schedule(function()
+    vim.opt.clipboard = 'unnamedplus'
+end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -86,12 +85,26 @@ vim.opt.confirm = true
 
 -- Highlight text for some time after yanking
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("YankHighlist", {
-		clear = true,
-	}),
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	desc = "Highlight Yank",
+    group = vim.api.nvim_create_augroup("YankHighlist", {
+        clear = true,
+    }),
+    pattern = "*",
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    desc = "Highlight Yank",
+})
+
+-- Use 2 spaces for Nix files to match community standard (RFC 166)
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("NixIndent", {
+        clear = true,
+    }),
+    pattern = "nix",
+    callback = function()
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.tabstop = 2
+        vim.opt_local.softtabstop = 2
+    end,
+    desc = "Set 2-space indent for Nix files",
 })
