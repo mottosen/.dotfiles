@@ -7,6 +7,9 @@ return {
         local actions = fzf.actions
 
         return {
+            winopts = {
+                border = "rounded",
+            },
             files = {
                 actions = {
                     ["alt-i"] = { actions.toggle_ignore },

@@ -1,13 +1,22 @@
 return {
     "stevearc/oil.nvim",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
+    lazy = false,
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
     opts = {
         view_options = {
             show_hidden = true,
         },
+        float = {
+            border = "rounded",
+            padding = 2,
+            max_width = 90,
+            max_height = 30,
+        },
+        confirmation = {
+            border = "rounded",
+            padding = 2,
+            max_width = 90,
+            max_height = 30,
+        },
     },
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-    lazy = false,
 }
