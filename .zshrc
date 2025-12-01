@@ -68,9 +68,11 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Set Aliases
+alias l="ls"
+alias ll="ls -al"
 alias vim="nvim"
 alias vh="nvim ."
-alias l="ls"
+alias gs="git status --short"
 alias ll="ls -al"
 alias py="python3"
 alias wipe="clear"
