@@ -283,9 +283,25 @@ return {
         --  - settings (table): Override the default settings passed when initializing the server.
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
         local servers = {
+            bashls = {},
+            cmake = {},
+            markdown_oxide = {},
+            nil_ls = {},
+            pylsp = {},
+            sqlls = {},
+            yamlls = {},
+
+            docker_language_server = {},
+            terraformls = {},
+            nginx_language_server = {},
+
             clangd = {
                 keys = {
-                    { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+                    {
+                        "<leader>ch",
+                        "<cmd>ClangdSwitchSourceHeader<cr>",
+                        desc = "Switch Source/Header (C/C++)",
+                    },
                 },
                 root_dir = function(fname)
                     return require("lspconfig.util").root_pattern(
@@ -322,6 +338,18 @@ return {
                 },
             },
 
+            omnisharp = {
+                settings = {
+                    RoslynExtensionsOptions = {
+                        EnableImportCompletion = true,
+                        EnableDecompilationSupport = true,
+                    },
+                    FormattingOptions = {
+                        EnableEditorConfigSupport = true,
+                    },
+                },
+            },
+
             lua_ls = {
                 settings = {
                     Lua = {
@@ -348,42 +376,20 @@ return {
         -- for you, so that they are available from within Neovim.
         local ensure_installed = vim.tbl_keys(servers or {})
         vim.list_extend(ensure_installed, {
-            -- LSPs
-            "bashls", -- bash
-            "clangd", -- clangd
-            "cmake", -- cmake
-            "docker_language_server", -- docker (file/compose)
-            "ltex_plus", -- LaTeX
-            "lua_ls", -- lua
-            "markdown-oxide", -- markdown
-            "nil_ls", -- nix
-            "pylsp", -- python
-            "sqlls", -- SQL
-            "terraformls", -- terraform
-            "yamlls", -- yaml
-            "nginx_language_server", -- nginx
-
             -- Formatters
-            "shellcheck",
-            "beautysh",
-            "sonarlint-language-server",
+            "bibtex-tidy",
+            "black",
             "clang-format",
             "cmakelang",
-            "biome",
-            "prettierd",
-            "prettier",
-            "stylua",
-            "tex-fmt",
-            "bibtex-tidy",
-            "checkmake",
-            "markdownlint",
+            "csharpier",
             "isort",
-            "black",
-            "sqlfluff",
-            "sqlfmt",
-            "terraform",
             "nginx-config-formatter",
             "nixfmt",
+            "prettier",
+            "shellharden",
+            "sqlfmt",
+            "stylua",
+            "tex-fmt",
         })
         require("mason-tool-installer").setup({
             ensure_installed = ensure_installed,
