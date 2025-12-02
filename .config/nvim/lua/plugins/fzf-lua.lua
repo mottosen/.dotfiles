@@ -100,14 +100,14 @@ return {
         {
             "<leader>fat",
             function()
-                require("fzf-lua").files({ cwd = "~/appstract" })
+                require("fzf-lua").files({ cwd = "~/appstract/projects/" })
             end,
             desc = "[F]uzzy [A]ppstract [T]ree.",
         },
         {
             "<leader>fas",
             function()
-                require("fzf-lua").live_grep({ cwd = "~/appstract" })
+                require("fzf-lua").live_grep({ cwd = "~/appstract/projects/" })
             end,
             desc = "[F]uzzy [A]ppstract [S]earch.",
         },
