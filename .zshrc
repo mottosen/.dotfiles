@@ -88,10 +88,10 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # zellij
 zz() {
-    if zellij list-sessions | grep 'zz'; then
-        zellij attach zz
+    if zellij list-sessions | grep "zz-$1"; then
+        zellij attach "zz-$1"
     else
-        zellij --new-session-with-layout zz --session zz
+        zellij --new-session-with-layout "$1" --session "zz-$1"
     fi
 }
 
