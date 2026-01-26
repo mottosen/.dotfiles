@@ -25,6 +25,9 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
+# Autosuggestion styling (visible but muted compared to main text)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#8a7a6a'
+
 # Add in snippets
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
@@ -81,6 +84,7 @@ alias db="devbox"
 alias zls="zellij list-sessions"
 alias zda="zellij delete-all-sessions"
 alias wipe="clear"
+alias copi="copilot"
 
 # Shell integrations
 eval "$(fzf --zsh)"
