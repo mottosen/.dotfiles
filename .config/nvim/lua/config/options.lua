@@ -95,16 +95,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight Yank",
 })
 
--- Use 2 spaces for Nix files to match community standard (RFC 166)
+-- Use 2 spaces for Nix and JSON files
 vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("NixIndent", {
+    group = vim.api.nvim_create_augroup("TwoSpaceIndent", {
         clear = true,
     }),
-    pattern = "nix",
+    pattern = { "nix", "json" },
     callback = function()
         vim.opt_local.shiftwidth = 2
         vim.opt_local.tabstop = 2
         vim.opt_local.softtabstop = 2
     end,
-    desc = "Set 2-space indent for Nix files",
+    desc = "Set 2-space indent for Nix and JSON files",
 })
