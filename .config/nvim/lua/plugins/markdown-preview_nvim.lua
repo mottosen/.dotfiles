@@ -11,7 +11,7 @@ return {
         },
     },
     build = function()
-        vim.fn["mkdp#util#install"]()
+        vim.fn.system("cd " .. vim.fn.stdpath("data") .. "/lazy/markdown-preview.nvim/app && npm install")
     end,
     init = function()
         vim.g.mkdp_theme = "dark"
