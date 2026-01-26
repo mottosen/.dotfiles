@@ -289,7 +289,6 @@ return {
             nil_ls = {},
             pylsp = {},
             sqlls = {},
-            yamlls = {},
 
             docker_language_server = {},
             terraformls = {},
@@ -375,7 +374,7 @@ return {
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
         local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
+        local formatters = {
             -- Formatters
             "bibtex-tidy",
             "black",
@@ -384,13 +383,19 @@ return {
             "csharpier",
             "isort",
             "nginx-config-formatter",
-            "nixfmt",
             "prettier",
             "shellharden",
             "sqlfmt",
             "stylua",
             "tex-fmt",
-        })
+        }
+
+        -- Only install nixfmt via Mason if it's not already available system-wide (non-NixOS)
+        if vim.fn.executable("nixfmt") == 0 then
+            table.insert(formatters, "nixfmt")
+        end
+
+        vim.list_extend(ensure_installed, formatters)
         require("mason-tool-installer").setup({
             ensure_installed = ensure_installed,
             auto_update = true,
