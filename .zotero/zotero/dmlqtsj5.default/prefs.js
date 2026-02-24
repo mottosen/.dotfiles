@@ -9,9 +9,9 @@
 // - modify it via the UI (e.g. via about:config in the browser); or
 // - set it within a user.js file in your profile.
 
-user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1770713624);
-user_pref("app.update.lastUpdateTime.background-update-timer", 1770713624);
-user_pref("app.update.lastUpdateTime.xpi-signature-verification", 1770713624);
+user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1771944042);
+user_pref("app.update.lastUpdateTime.background-update-timer", 1771944042);
+user_pref("app.update.lastUpdateTime.xpi-signature-verification", 1771944042);
 user_pref("browser.laterrun.bookkeeping.profileCreationTime", 1757074558);
 user_pref("browser.laterrun.bookkeeping.sessionCount", 24);
 user_pref("browser.startup.homepage_override.buildID", "20240801134912");
@@ -59,7 +59,7 @@ user_pref("extensions.zotero.sync.reminder.setUp.lastDisplayed", 1757075031);
 user_pref("extensions.zotero.useDataDir", true);
 user_pref("extensions.zoteroOpenOfficeIntegration.lastAttemptedVersion", "7.0.5.SOURCE");
 user_pref("gecko.handlerService.defaultHandlersVersion", 1);
-user_pref("idle.lastDailyNotification", 1770713658);
+user_pref("idle.lastDailyNotification", 1771945817);
 user_pref("intl.accept_languages", "en-US, en");
 user_pref("media.gmp-gmpopenh264.abi", "x86_64-gcc3");
 user_pref("media.gmp-gmpopenh264.hashValue", "94531e267314de661b2205c606283fb066d781e5c11027578f2a3c3aa353437c2289544074a28101b6b6f0179f0fe6bd890a0ae2bb6e1cf9053650472576366c");
@@ -69,8 +69,8 @@ user_pref("media.gmp-gmpopenh264.lastUpdate", 1768210303);
 user_pref("media.gmp-gmpopenh264.version", "1.8.1.2");
 user_pref("media.gmp.storage.version.observed", 1);
 user_pref("privacy.purge_trackers.date_in_cookie_database", "0");
-user_pref("privacy.purge_trackers.last_purge", "1770713658247");
+user_pref("privacy.purge_trackers.last_purge", "1771945817111");
 user_pref("security.sandbox.content.tempDirSuffix", "99ff36fa-73be-471b-9d0c-0657b9db3be5");
-user_pref("storage.vacuum.last.content-prefs.sqlite", 1761128990);
+user_pref("storage.vacuum.last.content-prefs.sqlite", 1771945817);
 user_pref("storage.vacuum.last.index", 1);
 user_pref("storage.vacuum.last.places.sqlite", 1769513584);
