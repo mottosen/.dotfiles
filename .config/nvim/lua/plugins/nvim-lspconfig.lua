@@ -289,6 +289,7 @@ return {
             nil_ls = {},
             pylsp = {},
             sqlls = {},
+            gopls = {},
 
             docker_language_server = {},
             terraformls = {},
