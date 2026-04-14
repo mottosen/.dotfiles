@@ -49,46 +49,6 @@ return {
         end,
     },
     {
-        "Jorenar/nvim-dap-disasm",
-
-        dependencies = { "rcarriga/nvim-dap-ui" },
-
-        keys = require("plugins.debug.keys").disasm_keys,
-
-        config = function()
-            require("dap-disasm").setup({
-                dapui_register = true,
-                dapview_register = true,
-                dapview = {
-                    keymap = "D",
-                    label = "Disassembly [D]",
-                    short_label = "󰒓 [D]",
-                },
-                winbar = {
-                    enabled = true,
-                    labels = {
-                        step_into = "Step Into",
-                        step_over = "Step Over",
-                        step_back = "Step Back",
-                    },
-                    order = {
-                        "step_into",
-                        "step_over",
-                        "step_back",
-                    },
-                },
-                sign = "DapStopped",
-                ins_before_memref = 16,
-                ins_after_memref = 16,
-                columns = {
-                    "address",
-                    "instructionBytes",
-                    "instruction",
-                },
-            })
-        end,
-    },
-    {
         "rcarriga/nvim-dap-ui",
 
         dependencies = {
@@ -140,6 +100,46 @@ return {
             -- dap.listeners.before.event_exited["dapui_config"] = function()
             --     dapui.close({})
             -- end
+        end,
+    },
+    {
+        "Jorenar/nvim-dap-disasm",
+
+        dependencies = { "rcarriga/nvim-dap-ui" },
+
+        keys = require("plugins.debug.keys").disasm_keys,
+
+        config = function()
+            require("dap-disasm").setup({
+                dapui_register = true,
+                dapview_register = true,
+                dapview = {
+                    keymap = "D",
+                    label = "Disassembly [D]",
+                    short_label = "󰒓 [D]",
+                },
+                winbar = {
+                    enabled = true,
+                    labels = {
+                        step_into = "Step Into",
+                        step_over = "Step Over",
+                        step_back = "Step Back",
+                    },
+                    order = {
+                        "step_into",
+                        "step_over",
+                        "step_back",
+                    },
+                },
+                sign = "DapStopped",
+                ins_before_memref = 16,
+                ins_after_memref = 16,
+                columns = {
+                    "address",
+                    "instructionBytes",
+                    "instruction",
+                },
+            })
         end,
     },
 }
