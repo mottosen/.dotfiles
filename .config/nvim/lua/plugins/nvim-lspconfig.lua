@@ -273,6 +273,9 @@ return {
         local capabilities =
             require("blink.cmp").get_lsp_capabilities(capabilities_default)
 
+        -- Broadcast enhanced capabilities to all LSP servers globally.
+        vim.lsp.config("*", { capabilities = capabilities })
+
         -- Enable the following language servers
         --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
         --
@@ -295,6 +298,8 @@ return {
             terraformls = {},
             nginx_language_server = {},
 
+            asm_lsp = {},
+
             clangd = {
                 keys = {
                     {
@@ -303,24 +308,17 @@ return {
                         desc = "Switch Source/Header (C/C++)",
                     },
                 },
-                root_dir = function(fname)
-                    return require("lspconfig.util").root_pattern(
-                        "Makefile",
-                        "configure.ac",
-                        "configure.in",
-                        "config.h.in",
-                        "meson.build",
-                        "meson_options.txt",
-                        "build.ninja"
-                    )(fname) or require("lspconfig.util").root_pattern(
-                        "compile_commands.json",
-                        "compile_flags.txt"
-                    )(fname) or vim.fs.dirname(
-                        vim.fs.find(".git", { path = startpath, upward = true })[1]
-                    )
-                end,
-                capabilities = {
-                    offsetEncoding = { "utf-16" },
+                root_markers = {
+                    "Makefile",
+                    "configure.ac",
+                    "configure.in",
+                    "config.h.in",
+                    "meson.build",
+                    "meson_options.txt",
+                    "build.ninja",
+                    "compile_commands.json",
+                    "compile_flags.txt",
+                    ".git",
                 },
                 cmd = {
                     "clangd",
@@ -328,25 +326,25 @@ return {
                     "--clang-tidy",
                     "--header-insertion=iwyu",
                     "--completion-style=detailed",
-                    "--function-arg-placeholders",
                     "--fallback-style=llvm",
+                    "--query-driver="
+                        .. "/nix/store/*/bin/gcc*,"            -- NixOS Nix store gcc (fallback driver path)
+                        .. "/nix/store/*/bin/clang*,"          -- NixOS Nix store clang (fallback driver path)
+                        .. "/run/current-system/sw/bin/gcc*,"  -- NixOS sw gcc
+                        .. "/run/current-system/sw/bin/g++*,"  -- NixOS sw g++
+                        .. "/run/current-system/sw/bin/clang*," -- NixOS sw clang
+                        .. "/usr/bin/gcc*,"                     -- Linux FHS gcc
+                        .. "/usr/bin/g++*,"                     -- Linux FHS g++
+                        .. "/usr/bin/clang*,"                   -- Linux FHS clang
+                        .. "/usr/local/bin/gcc*,"               -- macOS Homebrew gcc
+                        .. "/usr/local/bin/clang*,"             -- macOS Homebrew clang
+                        .. "/opt/homebrew/bin/gcc*,"            -- macOS Apple Silicon Homebrew
+                        .. "/opt/homebrew/bin/clang*",          -- macOS Apple Silicon Homebrew
                 },
                 init_options = {
                     usePlaceholders = true,
                     completeUnimported = true,
                     clangdFileStatus = true,
-                },
-            },
-
-            omnisharp = {
-                settings = {
-                    RoslynExtensionsOptions = {
-                        EnableImportCompletion = true,
-                        EnableDecompilationSupport = true,
-                    },
-                    FormattingOptions = {
-                        EnableEditorConfigSupport = true,
-                    },
                 },
             },
 
@@ -361,6 +359,42 @@ return {
             },
         }
 
+        -- Apply per-server config overrides using the nvim 0.11+ API.
+        -- vim.lsp.config(name, ...) merges with the server's built-in defaults
+        -- so only fields you explicitly set are overridden.
+        for server_name, server_config in pairs(servers) do
+            if next(server_config) ~= nil then
+                vim.lsp.config(server_name, server_config)
+            end
+        end
+
+        -- Returns true if the LSP server binary is already available system-wide.
+        -- Uses lspconfig's bundled server definitions as the source of truth for
+        -- the binary name, falling back to replacing underscores with dashes.
+        local function is_system_installed(server_name)
+            local ok, server_def =
+                pcall(require, "lspconfig.configs." .. server_name)
+            if
+                ok
+                and server_def.default_config
+                and server_def.default_config.cmd
+            then
+                return vim.fn.executable(server_def.default_config.cmd[1]) == 1
+            end
+            return vim.fn.executable((server_name:gsub("_", "-"))) == 1
+        end
+
+        -- Enable system-wide servers immediately; collect the rest for Mason.
+        -- This supports NixOS (and other distros) where LSPs are system packages.
+        local mason_server_names = {}
+        for server_name in pairs(servers) do
+            if is_system_installed(server_name) then
+                vim.lsp.enable(server_name)
+            else
+                table.insert(mason_server_names, server_name)
+            end
+        end
+
         -- Ensure the servers and tools above are installed
         --
         -- To check the current status of installed tools and/or manually install
@@ -374,7 +408,7 @@ return {
         --
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
-        local ensure_installed = vim.tbl_keys(servers or {})
+        local ensure_installed = mason_server_names
         local formatters = {
             -- Formatters
             "bibtex-tidy",
@@ -391,12 +425,15 @@ return {
             "tex-fmt",
         }
 
-        -- Only install nixfmt via Mason if it's not already available system-wide (non-NixOS)
-        if vim.fn.executable("nixfmt") == 0 then
-            table.insert(formatters, "nixfmt")
-        end
+        table.insert(formatters, "nixfmt")
 
-        vim.list_extend(ensure_installed, formatters)
+        -- Only pass formatters to Mason if they aren't already available system-wide.
+        -- Mason tool names use dashes; try that and the name as-is.
+        for _, fmt in ipairs(formatters) do
+            if vim.fn.executable(fmt) == 0 and vim.fn.executable((fmt:gsub("-", "_"))) == 0 then
+                table.insert(ensure_installed, fmt)
+            end
+        end
         require("mason-tool-installer").setup({
             ensure_installed = ensure_installed,
             auto_update = true,
@@ -406,18 +443,11 @@ return {
             ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
             automatic_installation = true,
             handlers = {
+                -- Called by mason-lspconfig once a server is installed.
+                -- Config overrides were already applied above via vim.lsp.config,
+                -- so we only need to enable the server here.
                 function(server_name)
-                    local server = servers[server_name] or {}
-                    -- This handles overriding only values explicitly passed
-                    -- by the server configuration above. Useful when disabling
-                    -- certain features of an LSP (for example, turning off formatting for ts_ls)
-                    server.capabilities = vim.tbl_deep_extend(
-                        "force",
-                        {},
-                        capabilities,
-                        server.capabilities or {}
-                    )
-                    require("lspconfig")[server_name].setup(server)
+                    vim.lsp.enable(server_name)
                 end,
             },
         })
