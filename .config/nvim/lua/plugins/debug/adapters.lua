@@ -2,7 +2,15 @@ local M = {}
 
 -- Ensure installed
 M.ensure_installed = {
+    "gdb",
     "cpptools",
+}
+
+-- Adapter for GDB debugging
+M.gdb = {
+    type = "executable",
+    command = "gdb",
+    args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
 }
 
 -- Adapter for C++ debugging

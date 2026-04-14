@@ -1,10 +1,8 @@
--- When gdb v14 is available, see https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-gdb
 return {
     {
         "mfussenegger/nvim-dap",
 
         dependencies = {
-            "rcarriga/nvim-dap-ui",
             "nvim-lua/plenary.nvim",
             {
                 "jay-babu/mason-nvim-dap.nvim",
@@ -51,29 +49,77 @@ return {
         end,
     },
     {
+        "Jorenar/nvim-dap-disasm",
+
+        dependencies = { "rcarriga/nvim-dap-ui" },
+
+        keys = require("plugins.debug.keys").disasm_keys,
+
+        config = function()
+            require("dap-disasm").setup({
+                dapui_register = true,
+                dapview_register = true,
+                dapview = {
+                    keymap = "D",
+                    label = "Disassembly [D]",
+                    short_label = "󰒓 [D]",
+                },
+                winbar = {
+                    enabled = true,
+                    labels = {
+                        step_into = "Step Into",
+                        step_over = "Step Over",
+                        step_back = "Step Back",
+                    },
+                    order = {
+                        "step_into",
+                        "step_over",
+                        "step_back",
+                    },
+                },
+                sign = "DapStopped",
+                ins_before_memref = 16,
+                ins_after_memref = 16,
+                columns = {
+                    "address",
+                    "instructionBytes",
+                    "instruction",
+                },
+            })
+        end,
+    },
+    {
         "rcarriga/nvim-dap-ui",
 
-        dependencies = { "nvim-neotest/nvim-nio" },
-
-        keys = {
-            {
-                "<leader>du",
-                function()
-                    require("dapui").toggle({})
-                end,
-                desc = "Dap UI",
-            },
-            {
-                "<leader>de",
-                function()
-                    require("dapui").eval()
-                end,
-                desc = "Eval",
-                mode = { "n", "v" },
-            },
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio",
         },
 
-        opts = {},
+        keys = require("plugins.debug.keys").dapui_keys,
+
+        opts = {
+            layouts = {
+                {
+                    elements = {
+                        { id = "scopes", size = 0.3 },
+                        { id = "watches", size = 0.2 },
+                        { id = "breakpoints", size = 0.2 },
+                        { id = "stacks", size = 0.3 },
+                    },
+                    size = 40,
+                    position = "left",
+                },
+                {
+                    elements = {
+                        { id = "repl", size = 0.5 },
+                        { id = "disassembly", size = 0.5 },
+                    },
+                    size = 0.3,
+                    position = "bottom",
+                },
+            },
+        },
 
         config = function(_, opts)
             local dap = require("dap")
@@ -82,6 +128,9 @@ return {
             dapui.setup(opts)
             dap.listeners.after.event_initialized["dapui_config"] = function()
                 dapui.open({})
+            end
+            dap.listeners.after.event_stopped["disasm_config"] = function()
+                require("dap-disasm").refresh()
             end
 
             -- dap.listeners.before.event_terminated["dapui_config"] = function()

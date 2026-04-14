@@ -140,4 +140,63 @@ M.keys = {
     },
 }
 
+M.disasm_keys = {
+    {
+        "<leader>dD",
+        function()
+            if require("dap").session() then
+                vim.cmd("vertical DapDisasm")
+            else
+                vim.notify("No active debug session", vim.log.levels.WARN)
+            end
+        end,
+        desc = "Disassembly View",
+    },
+    {
+        "<leader>dIi",
+        function()
+            if require("dap").session() then
+                require("dap").step_into({ granularity = "instruction" })
+            end
+        end,
+        desc = "Step Into (Instruction)",
+    },
+    {
+        "<leader>dIo",
+        function()
+            if require("dap").session() then
+                require("dap").step_over({ granularity = "instruction" })
+            end
+        end,
+        desc = "Step Over (Instruction)",
+    },
+    {
+        "<leader>dIb",
+        function()
+            if require("dap").session() then
+                require("dap").step_back({ granularity = "instruction" })
+            end
+        end,
+        desc = "Step Back (Instruction)",
+    },
+}
+
+M.dapui_keys = {
+    {
+        "<leader>du",
+        function()
+            require("dapui").toggle({})
+        end,
+        desc = "Dap UI",
+    },
+    {
+        "<leader>de",
+        function()
+            require("dapui").eval()
+        end,
+        desc = "Eval",
+        mode = { "n", "v" },
+    },
+}
+
 return M
