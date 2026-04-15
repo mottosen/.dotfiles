@@ -10,9 +10,7 @@ return {
             ft = "markdown",
         },
     },
-    build = function()
-        vim.fn.system("cd " .. vim.fn.stdpath("data") .. "/lazy/markdown-preview.nvim/app && npm install")
-    end,
+    build = ":call mkdp#util#install()",
     init = function()
         vim.g.mkdp_theme = "dark"
         -- vim.g.mkdp_browser = "firefox"
