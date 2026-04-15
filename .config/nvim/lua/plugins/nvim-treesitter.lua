@@ -5,7 +5,9 @@ return {
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
+            prefer_git = true,
             ensure_installed = {
+                "asm",
                 "c",
                 "lua",
                 "vim",
