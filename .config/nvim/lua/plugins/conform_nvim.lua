@@ -4,23 +4,29 @@ return {
     opts = {
         formatters_by_ft = {
             bash = { "shellharden" },
-            c = { "clang-format" },
             cmake = { "cmakelang" },
-            cpp = { "clang-format" },
-            cs = { "csharpier" },
-            css = { "prettier" },
-            html = { "prettier" },
-            json = { "prettier" },
-            js = { "prettier" },
-            latex = { "tex-fmt", "bibtex-tidy" },
-            lua = { "stylua" },
-            md = { "prettier" },
-            nginx = { "nginx-config-formatter" },
             nix = { "nixfmt" },
             python = { "isort", "black" },
+            lua = { "stylua" },
+
+            json = { "prettier" },
+            tex = { "tex-fmt", "bibtex-tidy" },
+            markdown = { "prettier" },
+
+            nginx = { "nginx-config-formatter" },
             sql = { "sqlfmt" },
-            ts = { "prettier" },
-            yaml = { "prettier" },
+            cs = { "csharpier" },
+
+            html = { "prettier" },
+            css = { "prettier" },
+            javascript = { "prettier" },
+            typescript = { "prettier" },
+        },
+
+        formatters = {
+            prettier = {
+                prepend_args = { "--bracket-spacing=false" },
+            },
         },
 
         format_on_save = {

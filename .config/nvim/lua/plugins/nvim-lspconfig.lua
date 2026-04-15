@@ -398,7 +398,6 @@ return {
             -- Formatters
             "bibtex-tidy",
             "black",
-            "clang-format",
             "cmakelang",
             "csharpier",
             "isort",
