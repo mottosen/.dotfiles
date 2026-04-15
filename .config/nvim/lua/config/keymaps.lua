@@ -54,6 +54,13 @@ vim.keymap.set(
     { desc = "Open File Viewer Buffer" }
 )
 
+vim.keymap.set(
+    "n",
+    "<leader>cl",
+    "<cmd>checkhealth vim.lsp<CR>",
+    { desc = "[C]heck [L]SP health" }
+)
+
 vim.keymap.set("n", "<leader>cf", function()
     require("conform").format({
         lsp_format = "fallback",
