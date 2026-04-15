@@ -1,56 +1,47 @@
 return {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     build = ":TSUpdate",
     config = function()
-        local configs = require("nvim-treesitter.configs")
+        -- Highlight and indent are Neovim core features in 0.12.
+        -- Enable them globally for all filetypes where a parser is available.
+        vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("treesitter-highlight", { clear = true }),
+            callback = function()
+                pcall(vim.treesitter.start)
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end,
+        })
 
-        configs.setup({
-            prefer_git = true,
-            ensure_installed = {
-                "asm",
-                "c",
-                "lua",
-                "vim",
-                "vimdoc",
-                "query",
-                "javascript",
-                "html",
-                "c_sharp",
-                "css",
-                "csv",
-                "bash",
-                "cmake",
-                "dockerfile",
-                "fsharp",
-                "git_config",
-                "git_rebase",
-                "gitcommit",
-                "gitignore",
-                "haskell",
-                "make",
-                "nginx",
-                "python",
-                "json",
-                "nix",
-                "yaml",
-            },
-
-            auto_install = true,
-            sync_install = false,
-            highlight = { enable = true },
-            indent = { enable = true },
-
-            require("nvim-treesitter.configs").setup({
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<Enter>",
-                        node_incremental = "<Enter>",
-                        scope_incremental = false,
-                        node_decremental = "<Backspace>",
-                    },
-                },
-            }),
+        -- Install parsers not bundled with Neovim.
+        -- install() is a no-op for parsers already present.
+        require("nvim-treesitter").install({
+            "asm",
+            "c",
+            "lua",
+            "vim",
+            "vimdoc",
+            "query",
+            "javascript",
+            "html",
+            "c_sharp",
+            "css",
+            "csv",
+            "bash",
+            "cmake",
+            "dockerfile",
+            "fsharp",
+            "git_config",
+            "git_rebase",
+            "gitcommit",
+            "gitignore",
+            "haskell",
+            "make",
+            "nginx",
+            "python",
+            "json",
+            "nix",
+            "yaml",
         })
     end,
 }
