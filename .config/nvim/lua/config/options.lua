@@ -72,6 +72,9 @@ vim.opt.inccommand = "split"
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
+-- Show a vertical ruler at column 80 (purely visual guide)
+vim.opt.colorcolumn = "80"
+
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
 
