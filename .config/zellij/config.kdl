@@ -1,6 +1,6 @@
 theme "ansi"
 pane_frames false
-copy_command "wl-copy"
+copy_use_osc52 true
 show_startup_tips false
 
 keybinds clear-defaults=true {
