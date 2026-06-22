@@ -311,7 +311,7 @@ return {
                     "--clang-tidy",
                     "--header-insertion=iwyu",
                     "--completion-style=detailed",
-                    "--fallback-style=llvm",
+                    "--fallback-style=WebKit",
                     "--query-driver="
                         .. "/nix/store/*/bin/gcc*,"            -- NixOS Nix store gcc (fallback driver path)
                         .. "/nix/store/*/bin/clang*,"          -- NixOS Nix store clang (fallback driver path)
@@ -396,6 +396,7 @@ return {
         local ensure_installed = mason_server_names
         local formatters = {
             -- Formatters
+            "clang-format",
             "bibtex-tidy",
             "black",
             "cmakelang",

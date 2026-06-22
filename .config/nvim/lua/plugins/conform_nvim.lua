@@ -3,6 +3,11 @@ return {
 
     opts = {
         formatters_by_ft = {
+            c = { "clang-format" },
+            cpp = { "clang-format" },
+            objc = { "clang-format" },
+            objcpp = { "clang-format" },
+            cuda = { "clang-format" },
             bash = { "shellharden" },
             cmake = { "cmakelang" },
             nix = { "nixfmt" },
@@ -24,6 +29,9 @@ return {
         },
 
         formatters = {
+            ["clang-format"] = {
+                prepend_args = { "--style=file", "--fallback-style=WebKit" },
+            },
             prettier = {
                 prepend_args = { "--bracket-spacing=false" },
             },
