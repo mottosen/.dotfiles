@@ -85,6 +85,20 @@ alias zls="zellij list-sessions"
 alias zda="zellij delete-all-sessions"
 alias wipe="clear"
 alias copi="copilot"
+alias vpnc="protonvpn connect"
+alias vpnd="protonvpn disconnect"
+alias pdb="pwndbg"
+ndu() {
+    mkdir -p .direnv
+    nix develop --profile .direnv/dev-profile
+}
+nd() {
+    if [ -e .direnv/dev-profile ]; then
+        nix develop .direnv/dev-profile
+    else
+        ndu
+    fi
+}
 
 # Shell integrations
 eval "$(fzf --zsh)"
