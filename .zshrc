@@ -122,3 +122,22 @@ if [[ $- == *i* && -z ${FASTFETCH_SHOWN-} ]]; then
   fi
   export FASTFETCH_SHOWN=1
 fi
+
+# yazi
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    local cwd
+
+    if [[ -n "$ZELLIJ" ]]; then
+        TERM=xterm-kitty command yazi "$@" --cwd-file="$tmp"
+    else
+        command yazi "$@" --cwd-file="$tmp"
+    fi
+
+    IFS= read -r -d '' cwd < "$tmp"
+    rm -f -- "$tmp"
+
+    if [[ -n "$cwd" && "$cwd" != "$PWD" && -d "$cwd" ]]; then
+        builtin cd -- "$cwd"
+    fi
+}
