@@ -9,11 +9,11 @@ id = "work"
 name = "Work"
 duration = "25m"
 time_format = "%M:%S"
-command = "notify-send 'Work Done!'"
+command = "~/.config/uair/blink-notify.sh 'Work Done!' 'Time for a break'"
 
 [[sessions]]
 id = "rest"
 name = "Rest"
 duration = "5m"
 time_format = "%M:%S"
-command = "notify-send 'Rest Done!'; uair"
+command = "~/.config/uair/blink-notify.sh 'Rest Done!' 'Back to work' & uair"
