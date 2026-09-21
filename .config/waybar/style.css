@@ -43,7 +43,7 @@ button:hover { border: none; background: inherit; }
   color: @on_error_container;
 }
 
-#clock, #custom-uair, #language, #pulseaudio, #network, #battery {
+#clock, #custom-uair, #custom-external, #language, #pulseaudio, #network, #battery {
   padding: 0 20px;
   margin: 0 5px;
   background: @secondary_container;

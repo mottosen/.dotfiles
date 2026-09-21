@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkMenu" id="menu">
+    <child>
+      <object class="GtkMenuItem" id="auto">
+        <property name="visible">True</property>
+        <property name="label">Whatever is plugged in</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="sep">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="home">
+        <property name="visible">True</property>
+        <property name="label">home — DP-2</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="diku">
+        <property name="visible">True</property>
+        <property name="label">diku — DP-2 + DP-4</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="samsung">
+        <property name="visible">True</property>
+        <property name="label">samsung — DP-5</property>
+      </object>
+    </child>
+  </object>
+</interface>

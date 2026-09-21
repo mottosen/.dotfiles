@@ -14,6 +14,7 @@
         "hyprland/workspaces",
     ],
     "modules-right": [
+        "custom/external",
         "hyprland/language",
         "pulseaudio",
         "network",
@@ -62,6 +63,22 @@
             "*": [ 7, 8 ],
             "eDP-1": [ 1, 2 ],
         },
+    },
+
+    "custom/external": {
+      "format": "󰍹 {}",
+      "tooltip-format": "external monitor of the current location",
+      "exec": "~/.config/hypr/scripts/external.sh get",
+      "interval": "once",
+      "signal": 8,
+      "menu": "on-click",
+      "menu-file": "~/.config/waybar/external-menu.xml",
+      "menu-actions": {
+        "auto": "~/.config/hypr/scripts/external.sh auto",
+        "home": "~/.config/hypr/scripts/external.sh DP-2",
+        "diku": "~/.config/hypr/scripts/external.sh DP-2 DP-4",
+        "samsung": "~/.config/hypr/scripts/external.sh DP-5"
+      }
     },
 
     "hyprland/language": {

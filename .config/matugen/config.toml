@@ -36,3 +36,8 @@ post_hook = 'pkill -SIGUSR1 kitty'
 input_path = './templates/mako-colors.conf'
 output_path = '~/.config/mako/colors.conf'
 post_hook = 'makoctl reload'
+
+
+[templates.yazi]
+input_path = './templates/yazi-theme.toml'
+output_path = '~/.config/yazi/theme.toml'
