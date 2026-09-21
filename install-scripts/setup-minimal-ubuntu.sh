@@ -13,7 +13,7 @@ esac
 
 # Ensure prerequisites
 sudo apt-get update -y
-sudo apt-get install -y curl git unzip tar kitty-terminfo stow
+sudo apt-get install -y curl git unzip tar kitty-terminfo stow zsh
 
 # --- fzf (official git install: bundles keybindings + completion) ---
 if [ ! -d "$HOME/.fzf" ]; then
@@ -42,3 +42,9 @@ curl -fsSL "https://github.com/so-fancy/diff-so-fancy/releases/latest/download/d
 chmod +x "$BIN_DIR/diff-so-fancy"
 
 echo "Done. Installed into $BIN_DIR"
+
+echo "Now setting up shell.."
+
+chsh -s "$(which zsh)"
+
+echo "Done."
